@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\AdminController;
 
 /*
@@ -22,4 +23,5 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::post('/create', [AdminController::class, 'create'])->name('create.admin');
+    Route::get('/games', [GameController::class, 'index'])->name('games.index');
 });
