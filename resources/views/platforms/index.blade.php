@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
                 
 @section('title')
-    {{ config('app.name') }} - Admin Games List
+    {{ config('app.name') }} - Admin Platforms List
 @endsection
            
 @section('breadcrumb')
@@ -15,7 +15,7 @@
                     </li>
                     {{-- <li class="breadcrumb-item"><a href="#">Layouts</a>
                     </li>  --}}
-                    <li class="breadcrumb-item active">Games
+                    <li class="breadcrumb-item active">Platforms
                     </li>
                 </ol>
             </div>
@@ -29,9 +29,9 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Game Lists</h4>
+                <h4 class="card-title">Platforms Lists</h4>
                 <div class="float-right">
-                    <a href="" class="btn btn-primary">+ Add Games</a>
+                    <a href="" class="btn btn-primary">+ Add Platforms</a>
                 </div>
             </div>
             <div class="card-body">
@@ -43,29 +43,37 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Platform</th>
-                            <th>Publishers</th>
-                            <th>Release date</th>
-                            <th>Active Listing</th>
+                            <th>Acronym</th>
+                            <th>Color</th>
+                            <th>Games</th>
+                            <th>Digital Distributor</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($games as $key => $game)
+                        @foreach ($platforms as $key => $platform)
                         <tr>
-                            <td>{{ $games->firstItem() + $key  }}</td>
+                            <td>{{ $platforms->firstItem() + $key  }}</td>
                             <td>
-                                <img src="{{ asset('games') }}/{{ $game->cover }}" class="mr-75" height="20" width="20" alt="game image not found">
-                                <span class="font-weight-bold">{{ ucfirst($game->name) }}</span>
+                                
+                                <span class="font-weight-bold">{{ ucfirst($platform->name) }}</span>
                             </td>
-                            <td>{{ $game->getPlatform->name }}</td>
                             <td>
-                                {{ $game->publisher }}
+                                
+                                <span class="font-weight-bold">{{ $platform->acronym }}</span>
                             </td>
-                            <td><span class="badge badge-pill badge-light-primary mr-1">{{ $game->release_date }}</span></td>
                             <td>
-                              
-                               {{ $game->getListing->count() }}
+                                
+                                <span class="font-weight-bold" style="background: {{ $platform->color }}; padding:5px; border-radius: 5px; color: #fff;">{{ $platform->color }}</span>
+                            </td>
+                            <td><span class="badge badge-pill badge-light-primary mr-1">{{ $platform->getGames->count() }}</span></td>
+                            <td>
+                               
+                                @foreach ($platform->digitals as $digital)
+                                <span class="font-weight-bold" style="background: #444; color: #fff; margin-right: 5px; padding: 5px; border-radius:5px; ">
+                                  {{ $digital->name }}
+                                </span>
+                                @endforeach
                             </td>
                             <td>
                                 <div class="dropdown">
@@ -89,7 +97,7 @@
                     </tbody>
                 </table>
 
-                {{ $games->links() }}
+                {{ $platforms->links() }}
             </div>
         </div>
     </div>

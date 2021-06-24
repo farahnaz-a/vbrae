@@ -11,7 +11,15 @@ class Game extends Model
 
     protected $guarded = [];
 
+    public function getPlatform()
+    {
+        return $this->belongsTo('App\Models\Platform', 'platform_id', 'id');
+    }
 
+    public function getListing()
+    {
+        return $this->hasMany('App\Models\Listing');
+    }
     
 
 }

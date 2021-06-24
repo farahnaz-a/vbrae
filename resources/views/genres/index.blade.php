@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
                 
 @section('title')
-    {{ config('app.name') }} - Admin Games List
+    {{ config('app.name') }} - Admin Genres List
 @endsection
            
 @section('breadcrumb')
@@ -15,7 +15,7 @@
                     </li>
                     {{-- <li class="breadcrumb-item"><a href="#">Layouts</a>
                     </li>  --}}
-                    <li class="breadcrumb-item active">Games
+                    <li class="breadcrumb-item active">Genres
                     </li>
                 </ol>
             </div>
@@ -29,9 +29,9 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Game Lists</h4>
+                <h4 class="card-title">Genres Lists</h4>
                 <div class="float-right">
-                    <a href="" class="btn btn-primary">+ Add Games</a>
+                    <a href="" class="btn btn-primary">+ Add Genres</a>
                 </div>
             </div>
             <div class="card-body">
@@ -43,30 +43,19 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Platform</th>
-                            <th>Publishers</th>
-                            <th>Release date</th>
-                            <th>Active Listing</th>
+                            <th>Games</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($games as $key => $game)
+                        @foreach ($genres as $key => $genre)
                         <tr>
-                            <td>{{ $games->firstItem() + $key  }}</td>
+                            <td>{{ $genres->firstItem() + $key  }}</td>
                             <td>
-                                <img src="{{ asset('games') }}/{{ $game->cover }}" class="mr-75" height="20" width="20" alt="game image not found">
-                                <span class="font-weight-bold">{{ ucfirst($game->name) }}</span>
+                                
+                                <span class="font-weight-bold">{{ ucfirst($genre->name) }}</span>
                             </td>
-                            <td>{{ $game->getPlatform->name }}</td>
-                            <td>
-                                {{ $game->publisher }}
-                            </td>
-                            <td><span class="badge badge-pill badge-light-primary mr-1">{{ $game->release_date }}</span></td>
-                            <td>
-                              
-                               {{ $game->getListing->count() }}
-                            </td>
+                            <td><span class="badge badge-pill badge-light-primary mr-1">{{ $genre->getGames->count() }}</span></td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown">
@@ -89,7 +78,7 @@
                     </tbody>
                 </table>
 
-                {{ $games->links() }}
+                {{ $genres->links() }}
             </div>
         </div>
     </div>

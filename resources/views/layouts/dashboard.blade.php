@@ -227,6 +227,12 @@
               <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Game &amp; Genres</span><i data-feather="more-horizontal"></i>
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('games.index') }}"><i data-feather='codesandbox'></i><span class="menu-title text-truncate" data-i18n="games">Games</span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('genres.index') }}"><i data-feather='gitlab'></i><span class="menu-title text-truncate" data-i18n="genres">Genres</span></a>
+                </li> 
+              <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Platforms </span><i data-feather="more-horizontal"></i>
+                </li>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('platforms.index') }}"><i data-feather='grid'></i><span class="menu-title text-truncate" data-i18n="games">Platforms</span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('digitals.index') }}"><i data-feather='octagon'></i><span class="menu-title text-truncate" data-i18n="genres">Digital</span></a>
                 </li> 
               <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Banner &amp; Pages</span><i data-feather="more-horizontal"></i>
                 </li>

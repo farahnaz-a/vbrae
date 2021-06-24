@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DigitalController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\PlatformController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +24,18 @@ Route::get('/', function () {
 
 // AdminController 
 Route::group(['prefix' => 'admin'], function () {
+
+    // AdminController 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::post('/create', [AdminController::class, 'create'])->name('create.admin');
+
+    // GameController
     Route::get('/games', [GameController::class, 'index'])->name('games.index');
+
+    // GenreController 
+    Route::get('/genres', [GenreController::class, 'index'])->name('genres.index');
+
+    // PlatformController 
+    Route::get('/platforms', [PlatformController::class, 'index'])->name('platforms.index');
+    Route::get('/digitals', [DigitalController::class, 'index'])->name('digitals.index');
 });
