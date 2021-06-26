@@ -3,9 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\DigitalController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\DigitalController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\PlatformController;
+use App\Http\Controllers\SalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +21,9 @@ use App\Http\Controllers\PlatformController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// FrontendController 
+Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
+
 
 // AdminController 
 Route::group(['prefix' => 'admin'], function () {
@@ -38,4 +41,13 @@ Route::group(['prefix' => 'admin'], function () {
     // PlatformController 
     Route::get('/platforms', [PlatformController::class, 'index'])->name('platforms.index');
     Route::get('/digitals', [DigitalController::class, 'index'])->name('digitals.index');
+
+    // ListingController 
+    Route::get('/listings', [ListingController::class, 'index'])->name('listings.index');
+
+   // SalesController 
+   Route::get('/sales', [SalesController::class, 'index'])->name('sales.index');
+
+
+// END Admin Route Group   
 });

@@ -1,0 +1,436 @@
+header {
+  background: linear-gradient(
+    0deg,
+    rgba(34, 33, 33, 0) 0%,
+    rgba(34, 33, 33, 0.8) 100%
+  );
+  position: sticky;
+  z-index: 999;
+  top: 0;
+  transition: 0.3s;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  font-weight: 500;
+  position: relative;
+  &.container {
+    @media screen and(max-width: 767.98px) {
+      width: 100%;
+      margin: 0;
+      max-width: unset;
+    }
+  }
+  @media screen and(max-width: 767.98px) {
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    padding: 0;
+  }
+  .search-box {
+    position: absolute;
+    top: -100%;
+    right: 0;
+    transition: 0.3s ease-in-out;
+    width: calc(100% - 12rem);
+    z-index: 1111;
+    height: 100%;
+    &.active {
+      top: 0;
+    }
+    @media screen and(max-width: 767.98px) {
+      width: 100%;
+    }
+    input {
+      height: 100%;
+      width: 100%;
+      border: none;
+      outline: none;
+      padding: 1rem;
+      font-size: 1.3rem;
+      background: $mutedBlack;
+      color: $white;
+      padding-right: 2.5rem;
+    }
+    i {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+  }
+  .left-header {
+    display: flex;
+    align-items: center;
+    .menu,
+    .ellipsis {
+      cursor: pointer;
+      display: none;
+    }
+    i {
+      color: $white;
+    }
+    @media screen and(max-width: 767.98px) {
+      justify-content: space-between;
+      width: 100%;
+      padding: 1rem;
+      background: $dark;
+      position: relative;
+      z-index: 111;
+      .menu,
+      .ellipsis {
+        display: block;
+      }
+    }
+    .logo {
+      margin-right: 1rem;
+      img {
+        width: 10rem;
+      }
+    }
+    & > ul {
+      margin-bottom: 0;
+      display: flex;
+      list-style: none;
+      @media screen and(max-width: 767.98px) {
+        position: absolute;
+        flex-direction: column;
+        transition: 0.3s ease-in-out;
+        left: -100%;
+        top: 0;
+        padding-left: 0;
+        width: 260px;
+        height: 100vh;
+        overflow: auto;
+        background: $dark;
+        &.active {
+          left: 0;
+        }
+      }
+      & > li {
+        &:last-child {
+          @media screen and(max-width: 767.98px) {
+            display: none;
+          }
+        }
+        & > a {
+          background: lighten($color: $darkBody, $amount: 10);
+          padding: 0.3rem 0.8rem;
+          border-radius: 2rem;
+          margin-right: 0.5rem;
+          transition: 0.2s;
+          &:hover {
+            background: darken($color: $dark, $amount: 10);
+            color: $white;
+          }
+          display: inline-block;
+          text-transform: capitalize;
+          text-decoration: none;
+          color: $fontColor;
+          @media screen and(max-width: 767.98px) {
+            border-radius: 0;
+            display: block;
+            margin-right: 0;
+            padding: 1rem;
+            background: $mutedBlack;
+            border-bottom: 1px solid $dark;
+          }
+        }
+        &.close {
+          display: none;
+          @media screen and(max-width: 767.98px) {
+            display: block;
+          }
+        }
+        &.list-nav {
+          position: relative;
+          & > div {
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.2s;
+            position: absolute;
+            width: 768px;
+            top: 2rem;
+            left: 0;
+            padding-top: 1rem;
+            transition: 0.2s;
+            @media screen and(max-width: 767.98px) {
+              width: 100%;
+              position: relative;
+              top: 0;
+              opacity: 1;
+              pointer-events: unset;
+              padding-top: 0;
+              transition: 0.3s ease-in-out;
+              overflow: hidden;
+              height: 0;
+              .row {
+                margin: 0;
+              }
+            }
+            .row {
+              & > div {
+                padding: 0;
+              }
+            }
+            .listing-item {
+              height: 100%;
+              p {
+                background: $black;
+                font-weight: 300;
+                margin-bottom: 0;
+                padding: 0.5rem 0.8rem;
+                border-bottom: 1px solid
+                  transparentize($color: $white, $amount: 0.8);
+                border-right: 1px solid
+                  transparentize($color: $white, $amount: 0.8);
+                @media screen and(max-width: 767.98px) {
+                  padding: 1rem;
+                }
+              }
+              ul {
+                list-style: none;
+                padding-left: 0;
+                margin-bottom: 0;
+                border-right: 1px solid
+                  transparentize($color: $white, $amount: 0.8);
+                background: $darkBody;
+                height: calc(100% - 2.5625rem);
+                @media screen and(max-width: 767.98px) {
+                  height: unset;
+                }
+                overflow: auto;
+                li {
+                  a {
+                    color: $fontColor;
+                    text-decoration: none;
+                    font-weight: 500;
+                    display: block;
+                    padding: 0.5rem 0.8rem;
+                    transition: 0.2s;
+                    text-transform: capitalize;
+                    @media screen and(max-width: 767.98px) {
+                      padding: 1rem;
+                    }
+                    &:hover {
+                      background: darken($color: $dark, $amount: 10);
+                      color: $white;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          &:hover {
+            & > div {
+              opacity: 1;
+              pointer-events: unset;
+            }
+          }
+        }
+      }
+    }
+  }
+  .right-header {
+    @media screen and(max-width: 767.98px) {
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      background: $mutedBlack;
+      border-top: 1px solid transparentize($color: $white, $amount: 0.8);
+      position: absolute;
+      z-index: 11;
+      top: 0;
+      transition: 0.2s;
+      &.active {
+        top: 4.381379310344828rem;
+      }
+    }
+    i {
+      color: $white;
+    }
+    .search-btn {
+      display: none;
+      @media screen and(max-width: 767.98px) {
+        display: block;
+        cursor: pointer;
+      }
+    }
+    .isLogin {
+      display: flex;
+      align-items: center;
+      & > span {
+        margin-left: 0.3rem;
+        height: 2.0625rem;
+        width: 2.0625rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5rem;
+        background: lighten($color: $darkBody, $amount: 10);
+        cursor: pointer;
+        transition: 0.3s;
+        &:hover {
+          background: $dark;
+        }
+        i {
+          color: $white;
+        }
+      }
+
+      .dropdown {
+        background: lighten($color: $darkBody, $amount: 10);
+        margin-left: 0.3rem;
+        height: 2.0625rem;
+        width: 3.5rem;
+        cursor: pointer;
+        transition: 0.3s;
+        border-radius: 5rem;
+        .dropdown-toggle::after {
+          content: none;
+        }
+        .dropdown-menu {
+          top: 0.8rem !important;
+          li {
+            a {
+              color: $fontColor;
+              transition: 0.3s;
+              text-transform: capitalize;
+              i {
+                color: $fontColor;
+                margin-right: 0.8rem;
+              }
+              &:hover {
+                color: $white;
+                i {
+                  color: $white;
+                }
+              }
+            }
+          }
+        }
+        &:hover {
+          background: $dark;
+        }
+        img {
+          padding: 0.2rem;
+          height: 1.875rem;
+          width: 1.875rem;
+          border-radius: 50%;
+          object-fit: cover;
+          margin-right: 0.3rem;
+        }
+        i {
+          margin-right: 0.5rem;
+        }
+      }
+      .btn {
+        margin-left: 0.3rem;
+        border-radius: 5rem;
+      }
+      .notification {
+        position: relative;
+        & > div {
+          position: absolute;
+          top: 3rem;
+          background: $dark;
+          width: 280px;
+          border-radius: 0.25rem;
+          transition: 0.3s ease-in-out;
+          transform-origin: top;
+          left: 50%;
+          transform: translateX(-65%) scale(0);
+          &.active {
+            transform: translateX(-65%) scale(1);
+          }
+          h3 {
+            padding: 1rem;
+            margin-bottom: 0;
+            border-bottom: 1px solid $darkBody;
+          }
+          & > a {
+            display: block;
+            padding: 1rem;
+            border-top: 1px solid $darkBody;
+            color: $fontColor;
+            &:hover {
+              color: $white;
+            }
+          }
+        }
+        ul {
+          padding: 1rem;
+          list-style: none;
+          margin-bottom: 0;
+          max-height: 300px;
+          overflow: auto;
+          &::-webkit-scrollbar {
+            width: 8px;
+            background: $black;
+          }
+          &::-webkit-scrollbar-thumb {
+            background: $darkBody;
+            border-radius: 0.25rem;
+          }
+          li {
+            &:last-child {
+              a {
+                margin-bottom: 0;
+              }
+            }
+            a {
+              margin-bottom: 1rem;
+              display: flex;
+              justify-content: space-between;
+              color: $fontColor;
+              transition: 0.3s;
+              &:hover {
+                color: $white;
+              }
+              .icon {
+                background: $yellow;
+                color: $white;
+                width: 3rem;
+                height: 3rem;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.2rem;
+                margin-right: 0.5rem;
+              }
+              p {
+                width: calc(100% - 4rem);
+                font-size: 0.875rem;
+                margin-bottom: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+    .isLogout {
+      display: flex;
+      font-size: 0.875rem;
+      .signin {
+        border-radius: 2rem 0 0 2rem;
+        padding: 0.3rem 0.8rem;
+        background: $green;
+        color: $white;
+        cursor: pointer;
+      }
+      .signup {
+        border-radius: 0 2rem 2rem 0;
+        padding: 0.3rem 0.8rem;
+        background: $yellow;
+        color: $white;
+        cursor: pointer;
+      }
+    }
+  }
+}
