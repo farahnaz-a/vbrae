@@ -35,24 +35,24 @@ class FrontendController extends Controller
     {
         $name = request()->name; 
 
-        // $game = Games::where('name', 'LIKE', '%'.$name.'%')->get();
+        $game = Games::where('name', 'LIKE', '%'.$name.'%')->get();
 
-        // if($game)
-        // {
-        //     return view('frontend.addListing', compact('game'));
-        // }
-        // else 
-        // {
-        //     return redirect()->route('frontend.addListing');
-        // }
-
-
-        $game = Game::search($name)->get();
-
-        foreach($game as $item)
+        if($game)
         {
-            dd($item);
+            return view('frontend.addListing', compact('game'));
         }
+        else 
+        {
+            return redirect()->route('frontend.addListing');
+        }
+
+
+        // $game = Game::search($name)->get();
+
+        // foreach($game as $item)
+        // {
+        //     dd($item);
+        // }
     }
 
     /**
