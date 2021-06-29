@@ -223,12 +223,14 @@
                 class="dropdown-menu dropdown-menu-dark"
                 aria-labelledby="dropdown-user"
               >
-                <li>
-                  <a class="dropdown-item" href="#"
-                    ><i class="fas fa-id-badge"></i>Admin</a
-                  >
-                </li>
-                <li><hr class="dropdown-divider" /></li>
+               @if(Auth::user()->role == 'admin')
+               <li>
+                <a class="dropdown-item" href="{{ route('dashboard') }}"
+                  ><i class="fas fa-id-badge"></i>Admin</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+               @endif
                 <li>
                   <a class="dropdown-item" href="./balance.html"
                     ><i class="fas fa-money-bill"></i>€ 612,72</a
@@ -284,7 +286,7 @@
                 </li>
               </ul>
             </div>
-            <a href="/add-listing.html" class="btn btn-sm btn-warning px-2">
+            <a href="{{ route('frontend.addListing') }}" class="btn btn-sm btn-warning px-2">
               <i class="fas fa-plus"></i
               ><span class="d-none d-lg-inline-block ms-2">Add listing</span>
             </a>
@@ -557,38 +559,39 @@
           <div class="row">
             <a href="#" class="col-6 col-sm-4 col-md-4 col-lg-2 text-center">
               <img
-                src="./assets/images/ps3_tiny.png"
+              
+                src="{{ asset('frontend_assets/assets/images/ps3_tiny.png') }}"
                 class="img-fluid"
                 alt="PlayStation 3"
               />
             </a>
             <a href="#" class="col-6 col-sm-4 col-md-4 col-lg-2 text-center">
-              <img src="./assets/images/pc_tiny.png" class="img-fluid" alt="PC" />
+              <img src="{{ asset('frontend_assets/assets/images/pc_tiny.png') }}" class="img-fluid" alt="PC" />
             </a>
             <a href="#" class="col-6 col-sm-4 col-md-4 col-lg-2 text-center">
               <img
-                src="./assets/images/xboxone_tiny.png"
+                src="{{ asset('frontend_assets/assets/images/xboxone_tiny.png') }}"
                 class="img-fluid"
                 alt="Xbox One"
               />
             </a>
             <a href="#" class="col-6 col-sm-4 col-md-4 col-lg-2 text-center">
               <img
-                src="./assets/images/ps4_tiny.png"
+                src="{{ asset('frontend_assets/assets/images/ps4_tiny.png') }}"
                 class="img-fluid"
                 alt="PlayStation 4"
               />
             </a>
             <a href="#" class="col-6 col-sm-4 col-md-4 col-lg-2 text-center">
               <img
-                src="./assets/images/xbox360_tiny.png"
+                src="{{ asset('frontend_assets/assets/images/xbox360_tiny.png') }}"
                 class="img-fluid"
                 alt="Xbox 360"
               />
             </a>
             <a href="#" class="col-6 col-sm-4 col-md-4 col-lg-2 text-center">
               <img
-                src="./assets/images/wii-u_tiny.png"
+                src="{{ asset('frontend_assets/assets/images/wii-u_tiny.png') }}"
                 class="img-fluid"
                 alt="Wii U"
               />
@@ -600,21 +603,21 @@
             <div class="col-md-6 col-lg-4">
               <div class="footer-item">
                 <a href="/" class="logo mb-4 d-inline-block">
-                  <img src="./assets/images/logo.png" alt="" />
+                  <img src="{{ asset('frontend_assets/assets/images/logo.png') }}" alt="" />
                 </a>
                 <p>Our Mobile Apps</p>
                 <div class="d-flex">
                   <div class="me-2">
                     <img
                       class="img-fluid"
-                      src="./assets/images/download-apple.png"
+                      src="{{ asset('frontend_assets/assets/images/download-apple.png') }}"
                       alt=""
                     />
                   </div>
                   <div class="ms-2">
                     <img
                       class="img-fluid"
-                      src="./assets/images/download-google.png"
+                      src="{{ asset('frontend_assets/assets/images/download-google.png') }}"
                       alt=""
                     />
                   </div>
@@ -687,7 +690,7 @@
               </div>
               <div class="col-md-6">
                 <img
-                  src="./assets/images/icon_payment_logos.png"
+                  src="{{ asset('frontend_assets/assets/images/icon_payment_logos.png') }}"
                   alt=""
                   class="img-fluid"
                 />
@@ -743,7 +746,7 @@
         // })
   
         //flipping animation
-        const words = ['buy', 'trade', 'sell']
+        const words = ['buy', 'sell']
         let count = 0
         const flip = document.querySelector('.flip')
         setInterval(() => {

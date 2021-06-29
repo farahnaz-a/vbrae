@@ -23,6 +23,9 @@ use App\Http\Controllers\SalesController;
 
 // FrontendController 
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
+Route::get('/add/listing', [FrontendController::class, 'addListing'])->name('frontend.addListing');
+Route::get('/search', [FrontendController::class, 'search'])->name('game.search');
+Route::get('/listing/form/{id}', [FrontendController::class, 'listingForm'])->name('frontend.listingForm');
 
 
 // AdminController 
@@ -44,6 +47,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     // ListingController 
     Route::get('/listings', [ListingController::class, 'index'])->name('listings.index');
+    Route::post('/listing/store', [ListingController::class, 'store'])->name('listings.store');
 
    // SalesController 
    Route::get('/sales', [SalesController::class, 'index'])->name('sales.index');

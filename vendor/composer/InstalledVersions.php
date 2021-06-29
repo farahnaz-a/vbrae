@@ -25,12 +25,12 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-main',
+    'version' => 'dev-main',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => '4d6ac39ed0eeb7e962d400948e14387393721363',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -509,12 +509,12 @@ private static $installed = array (
     ),
     'laravel/laravel' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-main',
+      'version' => 'dev-main',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => '4d6ac39ed0eeb7e962d400948e14387393721363',
     ),
     'laravel/sail' => 
     array (
@@ -578,6 +578,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'a4ffb135693e7982e5b982ca203f5dc7a7ae1126',
+    ),
+    'marcreichel/igdb-laravel' => 
+    array (
+      'pretty_version' => '2.4.6',
+      'version' => '2.4.6.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'aaaf7da764553f4318688266db0850c5164b25f2',
     ),
     'mobiledetect/mobiledetectlib' => 
     array (

@@ -72,7 +72,7 @@ notificationBtn?.addEventListener('click', () => {
 })
 
 //add listing page
-const searchLists = document.querySelectorAll('.search-details li > div')
+const searchLists = document.querySelectorAll('.search-details .list-item')
 const resetBtn = document.querySelector('.reset-btn')
 const searchSectionEl = document.querySelector('.search-section')
 const selectedSectionEl = document.querySelector('.selected-section')

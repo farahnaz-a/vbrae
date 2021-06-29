@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Game extends Model
+class Games extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
+    
+    protected $table = 'games';
 
     public function getPlatform()
     {
@@ -18,7 +20,7 @@ class Game extends Model
 
     public function getListing()
     {
-        return $this->hasMany('App\Models\Listing');
+        return $this->hasMany('App\Models\Listing', 'id', 'game_id');
     }
     
 

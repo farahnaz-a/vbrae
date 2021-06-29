@@ -18,6 +18,6 @@ class Listing extends Model
 
     public function getGame()
     {
-        return $this->belongsTo('App\Models\Game', 'game_id', 'id');
+        return $this->belongsTo('App\Models\Games', 'game_id', 'id');
     }
 }

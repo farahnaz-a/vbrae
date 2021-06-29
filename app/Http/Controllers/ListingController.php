@@ -24,4 +24,12 @@ class ListingController extends Controller
     {
         return view('listings.index', ['listings' => Listing::latest()->simplePaginate(20)]);
     }
+
+    /**
+     *  Listing store
+     */
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
 }
