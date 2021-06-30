@@ -80,8 +80,9 @@
                     <div class="col-sm-6">
                         <label for="">Platform</label>
                         <select class="form-select mb-3">
+                               <option value="{{ $data->platform_id }}">{{ $data->getPlatform->name }}</option>
                             @foreach (\App\Models\Platform::find($data->platform_id)->get() as $item)
-                                <option value="">{{ $item->name }}</option>
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -91,30 +92,23 @@
                         <label for="delivery">Select Delivery Type</label>
                         <select id="delivery" class="form-select mb-3">
                             <option value="Auto delivery">Auto delivery</option>
+                            <option value="Manual delivery">Manual delivery</option>
                         </select>
                     </div>
                     <div class="col-sm-6">
                         <label for="region">Select Region</label>
                         <select id="region" class="form-select mb-3">
-                            <option value="Global">Global</option>
+                                <option value="Global">Global</option>
+                            @foreach (\App\Models\Country::orderBy('name', 'asc')->get() as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-sm-12">
                         <label id="game_key_input">Game Key</label>
                         <div class="d-flex">
-                            <textarea class="form-control inline" rows="3" placeholder="1 Key/row"
+                            <textarea class="form-control inline" rows="3" placeholder="Use comma after every key."
                                 id="game_key_input"></textarea>
-                            <div class="ms-3">
-                                <button class="btn btn-primary text-nowrap" type="button" id="add-key-btn">
-                                    Add key
-                                </button>
-                            </div>
-                        </div>
-                        <div class="keys-container">
-                            <div class="keys-container-placeholder">
-                                <i class="fas fa-key" style="margin-bottom: 20px"></i>
-                                <p>Added key will show up here</p>
-                            </div>
                         </div>
                     </div>
                     <div class="mt-3">

@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '4d6ac39ed0eeb7e962d400948e14387393721363',
+    'reference' => '1964437ca071918a868fd3200b0476ba759dbb46',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -455,6 +455,15 @@ private static $installed = array (
         0 => 'v8.47.0',
       ),
     ),
+    'intervention/image' => 
+    array (
+      'pretty_version' => '2.5.1',
+      'version' => '2.5.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'abbf18d5ab8367f96b3205ca3c89fb2fa598c69e',
+    ),
     'jaybizzle/crawler-detect' => 
     array (
       'pretty_version' => 'v1.2.106',
@@ -514,7 +523,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '4d6ac39ed0eeb7e962d400948e14387393721363',
+      'reference' => '1964437ca071918a868fd3200b0476ba759dbb46',
     ),
     'laravel/sail' => 
     array (
