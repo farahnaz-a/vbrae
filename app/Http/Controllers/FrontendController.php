@@ -83,28 +83,25 @@ class FrontendController extends Controller
                                 'created_at'     => Carbon::now(),
                             ]);
                         }
-                        else 
-                        {
-                             
-                            $d =  Cover::where('game', $g->id)->first();
+                    }
+
+                    $d =  Cover::where('game', $g->id)->first();
 
                             
-                            $image = 'https:'.$d->url; 
-                            $filename = Carbon::now()->timestamp. '.jpg'; 
-                            $location = public_path('games/' . $filename);
-                            Image::make($image)->save($location);
-               
-                            Games::create([
-                                'name'           => $g->name, 
-                                'cover'          => $filename, 
-                                'description'    => $g->summary,
-                                'game_url_slug'  => $g->slug,
-                                'release_date'   => $g->first_release_date,
-                                'platform_id'    => 1,
-                                'created_at'     => Carbon::now(),
-                            ]);
-                        }
-                    }
+                    $image = 'https:'.$d->url; 
+                    $filename = Carbon::now()->timestamp. '.jpg'; 
+                    $location = public_path('games/' . $filename);
+                    Image::make($image)->save($location);
+       
+                    Games::create([
+                        'name'           => $g->name, 
+                        'cover'          => $filename, 
+                        'description'    => $g->summary,
+                        'game_url_slug'  => $g->slug,
+                        'release_date'   => $g->first_release_date,
+                        'platform_id'    => 1,
+                        'created_at'     => Carbon::now(),
+                    ]);
                 }
                
             }
