@@ -41,13 +41,19 @@ class FrontendController extends Controller
     {
         $name = request()->name; 
 
+
+
         $game = Games::where('name', 'LIKE', '%'.$name.'%')->get();
         
         if($game->count() == 0)
         {
             $games = Game::search($name)->get();
-            foreach($games as $g)
+
+            if($games->count() > 0)
             {
+                foreach($games as $g)
+            {
+                $d =  Cover::where('game', $g->id)->first();
                 $dbplatform = Platform::all();
                 foreach($g->platforms as $platform)
                 {
@@ -55,8 +61,10 @@ class FrontendController extends Controller
 
                     foreach($dbplatform as $dbplat)
                     {
+                       
                         if($dbplat->name == $platforms->name)
                         {
+                            
                             $d =  Cover::where('game', $g->id)->first();
 
                             
@@ -75,9 +83,31 @@ class FrontendController extends Controller
                                 'created_at'     => Carbon::now(),
                             ]);
                         }
+                        else 
+                        {
+                             
+                            $d =  Cover::where('game', $g->id)->first();
+
+                            
+                            $image = 'https:'.$d->url; 
+                            $filename = Carbon::now()->timestamp. '.jpg'; 
+                            $location = public_path('games/' . $filename);
+                            Image::make($image)->save($location);
+               
+                            Games::create([
+                                'name'           => $g->name, 
+                                'cover'          => $filename, 
+                                'description'    => $g->summary,
+                                'game_url_slug'  => $g->slug,
+                                'release_date'   => $g->first_release_date,
+                                'platform_id'    => 1,
+                                'created_at'     => Carbon::now(),
+                            ]);
+                        }
                     }
                 }
                
+            }
             }
         }
 
