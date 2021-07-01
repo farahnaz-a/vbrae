@@ -31,8 +31,9 @@
             </p>
         </div>
     </div>
-    <form action="{{ route('listings.store') }}" class="selected-section active"
-        style="overflow: hidden; transition: 0.3s ease-in-out">
+    <form action="{{ route('listings.store') }}" class="selected-section active" 
+        style="overflow: hidden; transition: 0.3s ease-in-out" method="POST">
+        @csrf
         <div class="page-content">
             <div class="content-header">
                 <h5>Selected Game</h5>
@@ -67,7 +68,7 @@
                             <label class="form-check-label" for="flexCheckDefault">
                                 Default checkbox
                             </label>
-                        </div> --}}
+                        {{-- </div>  --}}
                     </div>
                     <div class="col-sm-6">
                         {{-- <div class="form-check my-3">
@@ -79,9 +80,18 @@
                     </div>
                     <div class="col-sm-6">
                         <label for="">Platform</label>
+                        <input type="hidden" name="game_id" value="{{ $data->id }}">
                         <select class="form-select mb-3">
                                <option value="{{ $data->platform_id }}">{{ $data->getPlatform->name }}</option>
                             @foreach (\App\Models\Platform::find($data->platform_id)->get() as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="">Digital</label>
+                        <select class="form-select mb-3" name="digital">
+                            @foreach (\App\Models\Digital::all() as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
@@ -90,14 +100,14 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <label for="delivery">Select Delivery Type</label>
-                        <select id="delivery" class="form-select mb-3">
-                            <option value="Auto delivery">Auto delivery</option>
-                            <option value="Manual delivery">Manual delivery</option>
+                        <select id="delivery" class="form-select mb-3" name="deliver_type">
+                            <option value="1">Auto delivery</option>
+                            <option value="0">Manual delivery</option>
                         </select>
                     </div>
                     <div class="col-sm-6">
                         <label for="region">Select Region</label>
-                        <select id="region" class="form-select mb-3">
+                        <select id="region" class="form-select mb-3" name="region">
                                 <option value="Global">Global</option>
                             @foreach (\App\Models\Country::orderBy('name', 'asc')->get() as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -119,19 +129,19 @@
             <div class="sell-btn active">
                 <h2><i class="fas fa-shopping-basket me-2"></i> Sell</h2>
             </div>
-            <div class="content-header seller">
+            {{-- <div class="content-header seller">
                 <h5><i class="fas fa-shopping-basket me-2"></i>Seller Details</h5>
                 <div class="form-check form-switch">
                     <label class="form-check-label" for="price_suggestion">Price suggestions
                     </label>
                     <input class="form-check-input" type="checkbox" id="price_suggestion" />
                 </div>
-            </div>
+            </div> --}}
             <div class="content-body">
                 <label for="price">Select Region</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-euro-sign"></i></span>
-                    <input id="price" type="text" class="form-control form-control-lg" placeholder="Price in Euro..." />
+                    <input id="price" name="price" type="text" class="form-control form-control-lg" placeholder="Price in Euro..." />
                 </div>
                 <small class="text-muted">
                     <i class="fas fa-chart-line"></i> Average selling price for Age
@@ -144,18 +154,18 @@
                             <small>Secure<i class="fas fa-shield-alt ms-2"></i></small>
                         </div>
                         <div>
-                            <span>€ 0,00</span>
+                            <span>80%</span>
                             <small>Fast<i class="fas fa-rocket ms-2"></i></small>
                         </div>
                         <div>
-                            <small>Fees € 0,00</small>
+                            <small>Fees 20%</small>
                             <small>Easy<i class="fas fa-child ms-2"></i></small>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="my-3 text-end">
-                <button class="btn btn-green">
+                <button class="btn btn-green" type="submit">
                     <i class="fas fa-plus me-2"></i>Add Listing
                 </button>
             </div>

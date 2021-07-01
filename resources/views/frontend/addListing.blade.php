@@ -1,5 +1,9 @@
 @extends('layouts.frontend')
 
+@section('title')
+    {{ config('app.name') }} - Search Games
+@endsection
+
 @section('content')
 <div class="page-header">
     <div class="container">

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Auth; 
 
 class ListingController extends Controller
 {
@@ -30,6 +32,19 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'price'    => 'required', 
+            'digital'  => 'required', 
+        ]);
+
+        Listing::create([
+            'game_id'      => $request->game_id, 
+            'price'        => $request->price, 
+            'deliver_type' => $request->deliver_type,
+            'user_id'      => Auth::id(),
+            'created_at'   => Carbon::now(),
+        ]);
+
+        return redirect('/');
     }
 }
