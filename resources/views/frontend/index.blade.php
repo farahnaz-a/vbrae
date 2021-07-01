@@ -27,7 +27,7 @@
     <div class="slider">
       <div class="swiper-container mySwiper">
         <div class="swiper-wrapper">
-          @foreach($games->take(20) as $game)
+          @foreach($games->skip(5) as $game)
               
           <div class="swiper-slide">
             <a href="{{ $game->url_slug }}" class="game-slide">

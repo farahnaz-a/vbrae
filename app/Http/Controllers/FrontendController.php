@@ -22,7 +22,7 @@ class FrontendController extends Controller
     public function index()
     {
         return view('frontend.index', [
-            'games'      => Games::all(),
+            'games'      => Games::latest()->get(),
             'listings'   => Listing::where('status', 0)->orderBy('id', 'desc')->get(),
         ]);
     }
