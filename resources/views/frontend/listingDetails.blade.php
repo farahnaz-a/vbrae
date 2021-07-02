@@ -116,8 +116,8 @@
               <div id="media" class="d-none">
                 @if($game->screenshots)
                 @foreach ($game->screenshots as $item)
-                <div class="media-item" data-image="{{ str_replace('t_thumb', 't_cover_big', \MarcReichel\IGDBLaravel\Models\Screenshot::find($item)->url) }}">
-                    <img src="{{ str_replace('t_thumb', 't_cover_big', \MarcReichel\IGDBLaravel\Models\Screenshot::find($item)->url) }}" alt="">
+                <div class="media-item" data-image="{{ str_replace('t_thumb', 't_screenshot_med_2x', \MarcReichel\IGDBLaravel\Models\Screenshot::find($item)->url) }}">
+                    <img src="{{ str_replace('t_thumb', 't_screenshot_med_2x', \MarcReichel\IGDBLaravel\Models\Screenshot::find($item)->url) }}" alt="">
                     <i class="fas fa-image"></i>
                   </div>
                 @endforeach
