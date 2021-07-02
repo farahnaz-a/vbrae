@@ -216,7 +216,7 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <img src="./assets/images/admin.jpg" alt="" />
+                <img src="{{ Auth::user()->profile_photo_url }}" alt="" />
                 <i class="fas fa-caret-down"></i>
               </span>
               <ul
@@ -699,7 +699,7 @@
           </div>
         </div>
       </footer>
-  
+  @yield('js')
       <script>
         const swiper = new Swiper('.mySwiper', {
           slidesPerView: 5,

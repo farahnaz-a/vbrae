@@ -26,6 +26,8 @@ Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
 Route::get('/add/listing', [FrontendController::class, 'addListing'])->name('frontend.addListing');
 Route::get('/search', [FrontendController::class, 'search'])->name('game.search');
 Route::get('/listing/form/{id}', [FrontendController::class, 'listingForm'])->name('frontend.listingForm');
+Route::get('/listing/{id}/details', [FrontendController::class, 'listingDetails'])->name('frontend.listingDetails');
+Route::get('/game/{id}/overview', [FrontendController::class, 'overview'])->name('frontend.overview');
 
 
 // AdminController 

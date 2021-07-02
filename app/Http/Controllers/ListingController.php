@@ -43,6 +43,7 @@ class ListingController extends Controller
             'deliver_type' => $request->deliver_type,
             'user_id'      => Auth::id(),
             'created_at'   => Carbon::now(),
+            'digital'      => $request->digital,
         ]);
 
         return redirect('/');

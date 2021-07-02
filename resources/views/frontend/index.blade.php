@@ -27,51 +27,53 @@
     <div class="slider">
       <div class="swiper-container mySwiper">
         <div class="swiper-wrapper">
-          @foreach($games->skip(5) as $game)
-              
-          <div class="swiper-slide">
-            <a href="{{ $game->url_slug }}" class="game-slide">
-              <div>
-                {{-- @if(\Carbon\Carbon::parse($game->release_date)->diffInDays( \Carbon\Carbon::now() , false) < 0)
-                <span class="realise-date">
-                  <i class="fa fa-clock" aria-hidden="true"></i> {{ 'Release in',  \Carbon\Carbon::parse($game->release_date)->diffInDays( \Carbon\Carbon::now()) , ['days' => \Carbon\Carbon::parse($game->release_date)->diffInDays( \Carbon\Carbon::now())] }}
-                </span>
-                @endif --}}
-              
-                <img src="{{ asset('games') }}/{{ $game->cover }}" alt="" />
+          @foreach($games as $game)
+            @if(\App\Models\Listing::where('game_id', $game->id)->exists())
+            <div class="swiper-slide">
+              <a href="{{ $game->url_slug }}" class="game-slide">
                 <div>
-                  @if($game->getPlatform)
-                 
-                  @if($game->platform_id == 1)
-                  <span
+                  {{-- @if(\Carbon\Carbon::parse($game->release_date)->diffInDays( \Carbon\Carbon::now() , false) < 0)
+                  <span class="realise-date">
+                    <i class="fa fa-clock" aria-hidden="true"></i> {{ 'Release in',  \Carbon\Carbon::parse($game->release_date)->diffInDays( \Carbon\Carbon::now()) , ['days' => \Carbon\Carbon::parse($game->release_date)->diffInDays( \Carbon\Carbon::now())] }}
+                  </span>
+                  @endif --}}
+                
+                  <img src="{{ asset('games') }}/{{ $game->cover }}" alt="" />
+                  <div>
+                    @if($game->getPlatform)
+                   
+                    @if($game->platform_id == 1)
+                    <span
+                      class="platform-label"
+                      style="background-color: {{ $game->getPlatform->color }}"
+                      >{{ $game->getPlatform->name }}</span
+                    >
+                    @else
+                    <span
                     class="platform-label"
                     style="background-color: {{ $game->getPlatform->color }}"
                     >{{ $game->getPlatform->name }}</span
                   >
-                  @else
-                  <span
-                  class="platform-label"
-                  style="background-color: {{ $game->getPlatform->color }}"
-                  >{{ $game->getPlatform->name }}</span
-                >
-                  @endif
-                  @else 
-                  <span
-                  class="platform-label"
-                  style="background-color: #2222"
-                  >Not found</span
-                >
-                  @endif
-                  <div class="game-title">{{ $game->name }}</div>
-                  @if($game->getListing->count() == 0)
-                  <small>No listing available.</small>
-                  @else 
-                  <small>{{ $game->getListing->count() }} listing available.</small>
-                  @endif
+                    @endif
+                    @else 
+                    <span
+                    class="platform-label"
+                    style="background-color: #2222"
+                    >Not found</span
+                  >
+                    @endif
+                    <div class="game-title">{{ $game->name }}</div>
+                    @if(\App\Models\Listing::where('game_id', $game->id)->get()->count() == 0)
+                    <small>No listing available.</small>
+                    @else 
+                    <small>{{ \App\Models\Listing::where('game_id', $game->id)->get()->count() }} listing available.</small>
+                    @endif
+                  </div>
                 </div>
-              </div>
-            </a>
-          </div>            
+              </a>
+            </div>      
+            @endif  
+
           @endforeach
         </div>
       </div>
@@ -96,7 +98,7 @@
           @foreach ($listings as $listing)
           <div class="col-lg-3 col-xl-2 col-md-3 col-sm-4 col-6">
             <div class="list-item">
-              <a href="#">
+              <a href="{{ route('frontend.listingDetails', $listing->id) }}">
                 <div class="payment-enabled">
                   <span><i class="fas fa-shield-alt"></i></span>
                   <span><img src="{{ asset('frontend_assets/assets/images/globe.png') }}" alt="" /></span>

@@ -12,6 +12,7 @@ use MarcReichel\IGDBLaravel\Models\Game;
 use MarcReichel\IGDBLaravel\Models\Cover;
 use MarcReichel\IGDBLaravel\Models\Platform as Plat;
 use Image;
+use MarcReichel\IGDBLaravel\Models\GameVideo;
 use MarcReichel\IGDBLaravel\Models\Screenshot;
 
 class FrontendController extends Controller
@@ -21,6 +22,8 @@ class FrontendController extends Controller
      */
     public function index()
     {
+
+       
         return view('frontend.index', [
             'games'      => Games::latest()->get(),
             'listings'   => Listing::where('status', 0)->orderBy('id', 'desc')->get(),
@@ -138,6 +141,24 @@ class FrontendController extends Controller
         $data = Games::find($id); 
 
         return view('frontend.listingForm', compact('data'));
+    }
+
+    /**
+     *  Listing Details 
+     */
+    public function listingDetails($id)
+    {
+        $data = Listing::find($id); 
+        return view('frontend.listingDetails', compact('data'));
+    }
+
+    /**
+     *  Game overview 
+     */
+    public function overview($id)
+    {
+        $data = Games::find($id); 
+        return view('frontend.overview', compact('data'));
     }
 
 

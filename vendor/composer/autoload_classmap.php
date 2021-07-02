@@ -32,6 +32,7 @@ return array(
     'App\\Http\\Middleware\\TrustHosts' => $baseDir . '/app/Http/Middleware/TrustHosts.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Models\\Country' => $baseDir . '/app/Models/Country.php',
     'App\\Models\\Digital' => $baseDir . '/app/Models/Digital.php',
     'App\\Models\\DigitalPlatform' => $baseDir . '/app/Models/DigitalPlatform.php',
     'App\\Models\\GameKey' => $baseDir . '/app/Models/GameKey.php',
