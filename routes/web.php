@@ -25,6 +25,8 @@ use App\Http\Controllers\SalesController;
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
 Route::get('/add/listing', [FrontendController::class, 'addListing'])->name('frontend.addListing');
 Route::get('/search', [FrontendController::class, 'search'])->name('game.search');
+Route::get('/all/listing', [FrontendController::class, 'listing'])->name('frontend.listing');
+Route::get('/filter/listing/{id}', [FrontendController::class, 'filterlisting'])->name('frontend.filterlisting');
 Route::get('/listing/form/{id}', [FrontendController::class, 'listingForm'])->name('frontend.listingForm');
 Route::get('/listing/{id}/details', [FrontendController::class, 'listingDetails'])->name('frontend.listingDetails');
 Route::get('/game/{id}/overview', [FrontendController::class, 'overview'])->name('frontend.overview');

@@ -83,31 +83,29 @@
                   <div class="col-lg-3">
                     <div class="listing-item">
                       <p>Current Generation</p>
-                      <ul>
-                        <li><a href="./listing.html">All Listings</a></li>
-                        <li><a href="./listing.html">PlayStation 4</a></li>
-                        <li><a href="./listing.html">Xbox One</a></li>
-                        <li><a href="./listing.html">PC</a></li>
-                        <li><a href="./listing.html">Nintendo Switch</a></li>
-                        <li><a href="./listing.html">Wii U</a></li>
+                      <ul style="overflow-y:scroll; height:300px; ">
+                        <li><a href="{{ route('frontend.listing') }}">All Listings</a></li>
+                        @foreach (platforms() as $platform)
+                        <li><a href="{{ route('frontend.filterlisting', $platform->id) }}">{{ ucfirst($platform->name) }}</a></li>
+                        @endforeach
                       </ul>
                     </div>
                   </div>
                   <div class="col-lg-3">
                     <div class="listing-item">
                       <p>REGION</p>
-                      <ul>
+                      <ul style="overflow-y:scroll; height:300px; ">
                         <li><a href="./listing.html">Global</a></li>
-                        <li><a href="./listing.html">USA</a></li>
-                        <li><a href="./listing.html">EUROPE</a></li>
-                        <li><a href="./listing.html">ARGENTINA</a></li>
+                        @foreach (countries() as $country)
+                        <li><a href="./listing.html">{{ strtoupper($country->name) }}</a></li>
+                        @endforeach
                       </ul>
                     </div>
                   </div>
                   <div class="col-lg-3">
                     <div class="listing-item">
                       <p>PRICE</p>
-                      <ul>
+                      <ul style="overflow-y:scroll; height:300px; ">
                         <li><a href="./listing.html">1€</a></li>
                         <li><a href="./listing.html">5€</a></li>
                         <li><a href="./listing.html">10€</a></li>
@@ -120,7 +118,7 @@
                   <div class="col-lg-3">
                     <div class="listing-item">
                       <p>GENRE</p>
-                      <ul>
+                      <ul style="overflow-y:scroll; height:300px; ">
                         <li><a href="./listing.html">Football</a></li>
                         <li>
                           <a href="./listing.html">First-Person Shooter</a>
@@ -280,9 +278,12 @@
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
-                  <a class="dropdown-item" href="javascript:void(0)"
+                  <form action="{{ route('logout') }}" method="POST">
+                   @csrf 
+                   <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();"
                     ><i class="fas fa-power-off"></i>Logout</a
                   >
+                  </form>
                 </li>
               </ul>
             </div>

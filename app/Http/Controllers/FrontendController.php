@@ -146,6 +146,22 @@ class FrontendController extends Controller
     /**
      *  Listing Details 
      */
+    public function listing()
+    {
+        return view('frontend.listings', ['listings' => Listing::paginate(30)]);
+    }
+    /**
+     *  Listing Details 
+     */
+    public function filterlisting($id)
+    {
+        
+        return view('frontend.listings', ['listings' => Listing::where('platform_id', $id)->paginate(30)]);
+    }
+
+    /**
+     *  Listing Details 
+     */
     public function listingDetails($id)
     {
         $data = Listing::find($id); 

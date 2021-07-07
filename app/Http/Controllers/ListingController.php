@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Auth; 
 use Carbon\Carbon;
+use App\Models\Games;
 use App\Models\Listing;
 use Illuminate\Http\Request;
-use Auth; 
+use MarcReichel\IGDBLaravel\Models\Game;
 
 class ListingController extends Controller
 {
@@ -37,8 +39,10 @@ class ListingController extends Controller
             'digital'  => 'required', 
         ]);
 
+        $platform = Games::find($request->game_id);
         Listing::create([
             'game_id'      => $request->game_id, 
+            'platform_id'  => $platform->platform_id,
             'price'        => $request->price, 
             'deliver_type' => $request->deliver_type,
             'user_id'      => Auth::id(),
