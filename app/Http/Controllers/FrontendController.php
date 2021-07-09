@@ -158,6 +158,22 @@ class FrontendController extends Controller
         
         return view('frontend.listings', ['listings' => Listing::where('platform_id', $id)->paginate(30)]);
     }
+    /**
+     *  Listing Details 
+     */
+    public function regionlisting($region)
+    {
+        
+        return view('frontend.listings', ['listings' => Listing::where('region', $region)->paginate(30)]);
+    }
+    /**
+     *  Listing Details 
+     */
+    public function pricelisting($price)
+    {
+   
+        return view('frontend.listings', ['listings' => Listing::where('price', $price)->paginate(30)]);
+    }
 
     /**
      *  Listing Details 
@@ -175,6 +191,14 @@ class FrontendController extends Controller
     {
         $data = Games::find($id); 
         return view('frontend.overview', compact('data'));
+    }
+    /**
+     *  Game overview 
+     */
+    public function game()
+    {
+        $listings = Games::paginate(30); 
+        return view('frontend.listings', compact('listings'));
     }
 
 

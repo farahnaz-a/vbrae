@@ -1,5 +1,11 @@
 @extends('layouts.frontend')
 
+@if(Route::is('frontend.game'))
+@section('game')
+    active
+@endsection
+@endif
+
 @section('content')
 <section>
     <div class="bg-image" style="height: 360px"></div>

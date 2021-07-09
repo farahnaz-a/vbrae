@@ -15,12 +15,16 @@
           games!
         </h1>
         <div class="search">
-          <i class="fas fa-search"></i>
-          <input
-            type="text"
-            placeholder="Enter game title..."
-            class="form-control form-control-lg"
-          />
+          <form action="{{ route('game.search') }}" method="GET">
+          
+            <i class="fas fa-search"></i>
+            <input
+              type="text"
+              placeholder="Enter game title..."
+              class="form-control form-control-lg"
+              name="name"
+            />
+          </form>
         </div>
       </div>
     </div>

@@ -56,8 +56,10 @@
     <header>
       <div class="header container">
         <div class="search-box">
-          <input type="text" placeholder="search..." />
-          <i class="fas fa-times close-search-btn"></i>
+          <form action="{{ route('game.search') }}" method="GET">
+            <input type="text" placeholder="search..." name="name" />
+            <i class="fas fa-times close-search-btn"></i>
+          </form>
         </div>
         <div class="left-header">
           <div class="menu"><i class="fas fa-bars"></i></div>
@@ -80,7 +82,7 @@
               </a>
               <div>
                 <div class="row">
-                  <div class="col-lg-3">
+                  <div class="col-lg-4">
                     <div class="listing-item">
                       <p>Current Generation</p>
                       <ul style="overflow-y:scroll; height:300px; ">
@@ -91,30 +93,30 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-4">
                     <div class="listing-item">
                       <p>REGION</p>
                       <ul style="overflow-y:scroll; height:300px; ">
-                        <li><a href="./listing.html">Global</a></li>
+                        <li><a href="{{ url('/region/listing/Global') }}">Global</a></li>
                         @foreach (countries() as $country)
-                        <li><a href="./listing.html">{{ strtoupper($country->name) }}</a></li>
+                        <li><a href="{{ url('/region/listing') }}/{{ $country->name }}">{{ strtoupper($country->name) }}</a></li>
                         @endforeach
                       </ul>
                     </div>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-4">
                     <div class="listing-item">
                       <p>PRICE</p>
                       <ul style="overflow-y:scroll; height:300px; ">
-                        <li><a href="./listing.html">1€</a></li>
-                        <li><a href="./listing.html">5€</a></li>
-                        <li><a href="./listing.html">10€</a></li>
-                        <li><a href="./listing.html">20€</a></li>
-                        <li><a href="./listing.html">30€</a></li>
-                        <li><a href="./listing.html">40€</a></li>
+                        <li><a href="{{ url('/price/listing/1') }}">1€</a></li>
+                        <li><a href="{{ url('/price/listing/5') }}">5€</a></li>
+                        <li><a href="{{ url('/price/listing/10') }}">10€</a></li>
+                        <li><a href="{{ url('/price/listing/20') }}">20€</a></li>
+                        <li><a href="{{ url('/price/listing/30') }}">30€</a></li>
+                        <li><a href="{{ url('/price/listing/40') }}">40€</a></li>
                       </ul>
                     </div>
-                  </div>
+                  {{-- </div>
                   <div class="col-lg-3">
                     <div class="listing-item">
                       <p>GENRE</p>
@@ -129,12 +131,12 @@
                         <li><a href="./listing.html">Strategy</a></li>
                       </ul>
                     </div>
-                  </div>
+                  </div> --}}
                 </div>
               </div>
             </li>
-            <li>
-              <a href="/games">
+            <li class="@yield('game')">
+              <a href="{{ route('frontend.game') }}">
                 <i class="fas fa-gamepad"></i>
                 <span>Games</span>
               </a>
