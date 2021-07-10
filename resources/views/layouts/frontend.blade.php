@@ -216,7 +216,7 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <img src="{{ Auth::user()->profile_photo_url }}" alt="" />
+                <img src="{{ asset('uploads/users') }}/{{ Auth::user()->profile_photo_path }}" alt="" />
                 <i class="fas fa-caret-down"></i>
               </span>
               <ul
@@ -238,7 +238,7 @@
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
-                  <a class="dropdown-item" href="./dashboard.html"
+                  <a class="dropdown-item" href="{{ route('user.dashboard', Str::slug(Auth::user()->name)) }}"
                     ><i class="fas fa-tachometer-alt"></i>Dashboard</a
                   >
                 </li>

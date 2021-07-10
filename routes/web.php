@@ -9,6 +9,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,4 +62,12 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 // END Admin Route Group   
+});
+
+// User Dashboard Route Group 
+Route::group(['prefix' => 'users'], function () {
+    // UserController 
+    Route::get('/dashboard/{name}', [UserController::class, 'index'])->name('user.dashboard');
+    Route::get('/{id}/settings', [UserController::class, 'settings'])->name('user.settings');
+    Route::post('/{id}/update', [UserController::class, 'update'])->name('user.update');
 });

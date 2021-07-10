@@ -48,7 +48,7 @@
       <span class="price">€ {{ $listing->price }}</span>
     </a>
     <a href="./user.html" class="published-by">
-      <img src="{{ $listing->getUser->profile_photo_url }}" alt="" />
+      <img src="{{ asset('uploads/users') }}/{{ $listing->getUser->profile_photo_path }}" alt="" />
       <strong>{{ $listing->getUser->name }}</strong>
     </a>
   </div>

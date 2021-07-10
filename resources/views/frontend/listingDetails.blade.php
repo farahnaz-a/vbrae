@@ -95,7 +95,7 @@
                 <div class="page-content">
                     <div class="content-header user">
                       <div>
-                        <img src="{{ $data->getUser->profile_photo_url }}" alt="">
+                        <img src="{{ asset('uploads/users') }}/{{ $data->getUser->profile_photo_path }}" alt="">
                         <a href="#">
                           <h6>{{ $data->getUser->name }}</h6>
                           {{-- <img src="./assets/images/flags/PK.svg" width="14" alt=""> --}}
