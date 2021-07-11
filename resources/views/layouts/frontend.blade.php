@@ -269,15 +269,15 @@
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="./setting.html"
+                  <a class="dropdown-item" href="{{ route('user.settings', Auth::id()) }}"
                     ><i class="fas fa-wrench"></i>Settings</a
                   >
                 </li>
-                <li>
+                {{-- <li>
                   <a class="dropdown-item" href="./profile.html"
                     ><i class="fas fa-user"></i>Profile</a
                   >
-                </li>
+                </li> --}}
                 <li><hr class="dropdown-divider" /></li>
                 <li>
                   <form action="{{ route('logout') }}" method="POST">
