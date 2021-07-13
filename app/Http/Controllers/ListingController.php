@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GameKey;
 use Auth; 
 use Carbon\Carbon;
 use App\Models\Games;
@@ -41,7 +42,7 @@ class ListingController extends Controller
         ]);
 
         $platform = Games::find($request->game_id);
-        Listing::create([
+        $listing = Listing::create([
             'game_id'      => $request->game_id, 
             'platform_id'  => $platform->platform_id,
             'price'        => $request->price, 
@@ -50,6 +51,20 @@ class ListingController extends Controller
             'created_at'   => Carbon::now(),
             'digital'      => $request->digital,
         ]);
+
+        if($request->has('game_key'))
+        {
+            $keys = explode(',' , $request->game_key); 
+            foreach($keys as $item)
+            {
+                GameKey::create([
+                    'game_id'         => $request->game_id, 
+                    'game_list_id'    => $listing->id,
+                    'game_key'        => $item, 
+                    'created_at'      => Carbon::now(),
+                ]);
+            }
+        }
 
         return redirect('/');
     }

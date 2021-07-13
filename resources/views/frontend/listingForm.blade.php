@@ -117,7 +117,7 @@
                     <div class="col-sm-12">
                         <label id="game_key_input">Game Key</label>
                         <div class="d-flex">
-                            <textarea class="form-control inline" rows="3" placeholder="Use comma after every key."
+                            <textarea name="game_key" class="form-control inline" rows="3" placeholder="Use comma after every key."
                                 id="game_key_input"></textarea>
                         </div>
                     </div>

@@ -8,5 +8,7 @@ function countries()
 {
     return App\Models\Country::orderBy('name', 'asc')->get();
 }
-
-?>
+function wishListCount($id)
+{
+    return App\Models\WishList::where('game_id', $id)->get()->count();
+}

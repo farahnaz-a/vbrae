@@ -142,6 +142,9 @@
                   <div class="game-title">{{ $listing->name }}</div>
                 </div>
               </div>
+              @if(wishListCount($listing->id) > 0)
+              <span class="price bg-dark"><i class="fa fa-heartbeat me-2"></i>{{ wishListCount($listing->id) }}</span>
+              @endif
               {{-- <span class="price">€ {{ $listing->price }}</span> --}}
             </a>
             {{-- <a href="./user.html" class="published-by">

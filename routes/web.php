@@ -10,6 +10,7 @@ use App\Http\Controllers\ListingController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WishListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,9 @@ Route::get('/listing/form/{id}', [FrontendController::class, 'listingForm'])->na
 Route::get('/listing/{id}/details', [FrontendController::class, 'listingDetails'])->name('frontend.listingDetails');
 Route::get('/game/{id}/overview', [FrontendController::class, 'overview'])->name('frontend.overview');
 Route::get('/game', [FrontendController::class, 'game'])->name('frontend.game');
+Route::get('/wishlists', [WishListController::class, 'index'])->name('wishlist.index');
+Route::get('/wishlist/{id}/delete', [WishListController::class, 'delete'])->name('wishlist.delete');
+Route::post('/wishlist-store', [WishListController::class, 'store'])->name('wishlist.store');
 
 
 // AdminController 

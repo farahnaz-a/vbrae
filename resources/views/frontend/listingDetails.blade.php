@@ -38,12 +38,20 @@
           <div class="game-detail">
             <h3 class="title"><strong>{{ $data->getGame->name }}</strong> {{ \Carbon\Carbon::parse($data->getGame->release_date)->format('Y') }}</h3>
             <div class="game-btns">
-              <span title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#wishlist"
-                ><i class="fas fa-heart"></i
-                ><span class="d-none d-md-inline ms-2"
-                  >Add to wishlist</span
-                ></span
-              >
+               @auth
+             
+                @if(\App\Models\WishList::where('game_id', $data->getGame->id)->where('listing_id', $data->id)->where('user_id', Auth::id())->doesntExist())
+                <span title="Add to wishlist" data-bs-toggle="modal" data-bs-target="#wishlist"><i class="fas fa-heart"></i><span class="d-none d-md-inline ms-2"
+                  >Add to wishlist</span>
+                </span>
+                @else 
+                <span title="On your wishlist" ><i class="fas fa-heart"></i><span class="d-none d-md-inline ms-2"
+                  >On your wishlist</span>
+                </span>
+                @endif
+
+               @endauth
+             
               <a href="{{ route('frontend.overview', $data->game_id) }}" title="Go to Gameoverview"
                 ><i class="fas fa-gamepad"></i
                 ><span class="d-none d-md-inline ms-2">
@@ -231,9 +239,11 @@
                   <small>{{ $data->getGame->getPlatform->name }}</small>
                 </div>
               </div>
+              <form method="post" action="{{ route('wishlist.store') }}">
+                @csrf 
               <div class="p-3" style="background-color: #1b1b1b;">
                 <div class="form-check">
-                  <input id="price-input" class="form-check-input" type="checkbox" value="">
+                  <input id="price-input" name="notification" class="form-check-input" type="checkbox" value="yes">
                   <label class="form-check-label" for="price-input">
                     <i class="fas fa-bell me-2"></i> Send notifications
                   </label>
@@ -243,7 +253,7 @@
                     <label for="maximum">Maximum Price</label>
                     <div class="input-group mb-2">
                       <span class="input-group-text" id="basic-addon1">€</span>
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" name="price" class="form-control" placeholder="">
                     </div>
                     <small><i class="fas fa-info-circle me-1"></i>Leave blank if you want to get a notification for each DOOM listing.</small>
                   </div>
@@ -252,10 +262,15 @@
             </div>
             <div class="modal-footer">
               <button class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
-              <button type="button" class="btn btn-animation btn-danger mb-2">
+             
+                <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+                <input type="hidden" name="game_id" value="{{ $data->getGame->id }}">
+                <input type="hidden" name="listing_id" value="{{ $data->id }}">
+              <button type="submit" class="btn btn-animation btn-danger mb-2">
                 <span class="icon"><i class="fas fa-heart"></i></span>
                 <span class="text">Add Wishlist</span>
               </button>
+            </form>
             </div>
           </div>
         </div>

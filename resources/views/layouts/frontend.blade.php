@@ -253,7 +253,7 @@
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="./wishlist.html"
+                  <a class="dropdown-item" href="{{ route('wishlist.index') }}"
                     ><i class="fas fa-heart"></i>Wishlist</a
                   >
                 </li>
@@ -554,7 +554,11 @@
         </div>
       </div>
     </header>
-
+      @if(session('success'))
+      <div class="alert alert-success" style="z-index: 99999999;">
+        {{ session('success') }}
+      </div>
+      @endif
        @yield('content')
 
        <footer class="one">
