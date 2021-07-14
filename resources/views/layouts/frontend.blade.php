@@ -247,11 +247,11 @@
                     ><i class="fas fa-tags"></i>Listings</a
                   >
                 </li>
-                <li>
+                {{-- <li>
                   <a class="dropdown-item" href="./offers.html"
                     ><i class="fas fa-briefcase"></i>Offer</a
                   >
-                </li>
+                </li> --}}
                 <li>
                   <a class="dropdown-item" href="{{ route('wishlist.index') }}"
                     ><i class="fas fa-heart"></i>Wishlist</a

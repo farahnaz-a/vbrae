@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GameKey;
+use Mail;
 use Auth; 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Games;
+use App\Models\GameKey;
 use App\Models\Listing;
+use App\Models\WishList;
+use App\Mail\WishListMailer;
 use Illuminate\Http\Request;
 use MarcReichel\IGDBLaravel\Models\Game;
 
@@ -66,6 +70,27 @@ class ListingController extends Controller
             }
         }
 
+        $wishes = WishList::where('game_id', $request->game_id)->where('notification', 'yes')->get();
+
+        foreach($wishes as $wish)
+        {
+            if($wish->price)
+            {
+              if($wish->price <= $request->price)
+              {
+                $url  = route('frontend.listingDetails', $listing->id);
+                $game = Games::find($request->game_id)->name; 
+                Mail::to(User::find($wish->user_id)->email)->send(new WishListMailer($url, $game));
+              }
+            }
+            else 
+            {
+                $url = route('frontend.listingDetails', $listing->id);
+                $game = Games::find($request->game_id)->name; 
+                Mail::to(User::find($wish->user_id)->email)->send(new WishListMailer($url, $game));
+            }
+
+        }
         return redirect('/');
     }
 }
