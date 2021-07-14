@@ -34,7 +34,7 @@
         <div class="right">
           <div class="game-detail">
             <h3 class="title"><strong>{{ $data->name }}</strong> {{ \Carbon\Carbon::parse($data->release_date)->format('Y') }}</h3>
-            <div class="game-btns">
+            {{-- <div class="game-btns">
               <span
                 title="Add to wishlist"
                 data-bs-toggle="modal"
@@ -44,7 +44,7 @@
                   >Add to wishlist</span
                 ></span
               >
-            </div>
+            </div> --}}
             <p class="description">
                {{ $data->description }}
             </p>
