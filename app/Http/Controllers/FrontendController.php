@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use Carbon\Carbon;
+use App\Models\User;
+// use App\Models\Platform;
 use App\Models\Games;
 use App\Models\Listing;
-// use App\Models\Platform;
 use App\Models\Platform;
 use Illuminate\Http\Request;
 use MarcReichel\IGDBLaravel\Models\Game;
 use MarcReichel\IGDBLaravel\Models\Cover;
-use MarcReichel\IGDBLaravel\Models\Platform as Plat;
-use Image;
 use MarcReichel\IGDBLaravel\Models\GameVideo;
 use MarcReichel\IGDBLaravel\Models\Screenshot;
+use MarcReichel\IGDBLaravel\Models\Platform as Plat;
 
 class FrontendController extends Controller
 {
@@ -199,6 +200,16 @@ class FrontendController extends Controller
     {
         $listings = Games::paginate(30); 
         return view('frontend.listings', compact('listings'));
+    }
+
+    /**
+     *  User Profile 
+     */
+    public function userprofile($id, $name)
+    {
+        $user  = User::find($id); 
+
+        return view('frontend.profile', compact('user'));
     }
 
 

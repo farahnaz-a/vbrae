@@ -33,7 +33,7 @@
           @foreach($games as $game)
             @if(\App\Models\Listing::where('game_id', $game->id)->exists())
             <div class="swiper-slide">
-              <a href="{{ $game->url_slug }}" class="game-slide">
+              <a href="{{ route('frontend.overview', $game->id) }}" class="game-slide">
                 <div>
                   {{-- @if(\Carbon\Carbon::parse($game->release_date)->diffInDays( \Carbon\Carbon::now() , false) < 0)
                   <span class="realise-date">

@@ -12,3 +12,7 @@ function wishListCount($id)
 {
     return App\Models\WishList::where('game_id', $id)->get()->count();
 }
+function notification($id)
+{
+    return \App\Models\Notification::where('user_id', $id)->where('seen', 'no')->get();
+}

@@ -155,56 +155,42 @@
            <div class="isLogin">
             <span class="message"> <i class="fas fa-envelope"></i></span>
             <span class="notification">
-              <i class="fas fa-bell"></i>
+              <i class="fas fa-bell">
+                @if(notification(Auth::id())->count() > 0)
+                <div style="background: red;
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                position: absolute;
+                /* z-index: 999999; */
+                top: 9px;
+                right: 9px;
+            }"></div>
+                @endif
+              </i>
               <div class="notification-dropdown">
                 <h3>Notifications</h3>
                 <ul>
-                  <li>
-                    <a href="#">
+                  @forelse (notification(Auth::id()) as $item)
+                        <li>
+                    <a href="{{ route('notification.seen', $item->id) }}">
                       <span class="icon"
                         ><i class="fas fa-envelope-open"></i
                       ></span>
                       <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Culpa, accusamus.
+                        {{ $item->message }}
                       </p>
                     </a>
                   </li>
-                  <li>
-                    <a href="#">
-                      <span class="icon"
-                        ><i class="fas fa-envelope-open"></i
-                      ></span>
-                      <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Culpa, accusamus.
-                      </p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="icon"
-                        ><i class="fas fa-envelope-open"></i
-                      ></span>
-                      <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Culpa, accusamus.
-                      </p>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <span class="icon"
-                        ><i class="fas fa-envelope-open"></i
-                      ></span>
-                      <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Culpa, accusamus.
-                      </p>
-                    </a>
-                  </li>
+                  @empty
+                    <li>
+                      No new notification.
+                    </li>
+                  @endforelse
+
+                  
                 </ul>
-                <a href="./notification.html"
+                <a href="{{ route('notification.index') }}"
                   ><i class="fas fa-bell me-2"></i>View all notifications</a
                 >
               </div>
@@ -264,7 +250,7 @@
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
-                  <a class="dropdown-item" href="./notification.html"
+                  <a class="dropdown-item" href="{{ route('notification.index') }}"
                     ><i class="fas fa-bell"></i>Notifications</a
                   >
                 </li>

@@ -11,6 +11,7 @@ use App\Models\GameKey;
 use App\Models\Listing;
 use App\Models\WishList;
 use App\Mail\WishListMailer;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use MarcReichel\IGDBLaravel\Models\Game;
 
@@ -76,19 +77,47 @@ class ListingController extends Controller
         {
             if($wish->price)
             {
-              if($wish->price <= $request->price)
+              if($request->price <= $wish->price)
               {
+
                 $url  = route('frontend.listingDetails', $listing->id);
                 $game = Games::find($request->game_id)->name; 
+
+                Notification::create([
+                    'message'    => $game . ' has a new listing.', 
+                    'url'        => $url,
+                    'game_id'    => $request->game_id,
+                    'listing_id' => $listing->id,
+                    'user_id'    => $wish->user_id,
+                    'type'       => 'wishlist',
+                    'created_at' => Carbon::now(),
+                ]);
+
                 Mail::to(User::find($wish->user_id)->email)->send(new WishListMailer($url, $game));
               }
             }
             else 
             {
+
+
                 $url = route('frontend.listingDetails', $listing->id);
                 $game = Games::find($request->game_id)->name; 
+                Notification::create([
+                    'message'    => $game . ' has a new listing.', 
+                    'url'        => $url,
+                    'game_id'    => $request->game_id,
+                    'listing_id' => $listing->id,
+                    'user_id'    => $wish->user_id,
+                    'type'       => 'wishlist',
+                    'created_at' => Carbon::now(),
+                ]);
+
                 Mail::to(User::find($wish->user_id)->email)->send(new WishListMailer($url, $game));
+
+
             }
+
+          
 
         }
         return redirect('/');

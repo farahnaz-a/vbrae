@@ -7,6 +7,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\DigitalController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\UserController;
@@ -38,7 +39,9 @@ Route::get('/game', [FrontendController::class, 'game'])->name('frontend.game');
 Route::get('/wishlists', [WishListController::class, 'index'])->name('wishlist.index');
 Route::get('/wishlist/{id}/delete', [WishListController::class, 'delete'])->name('wishlist.delete');
 Route::post('/wishlist-store', [WishListController::class, 'store'])->name('wishlist.store');
-
+Route::get('/notification/{id}/seen', [NotificationController::class, 'seen'])->name('notification.seen');
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.index');
+Route::get('/user-profile/{id}/{name}', [FrontendController::class, 'userprofile'])->name('frontend.userprofile');
 
 // AdminController 
 Route::group(['prefix' => 'admin'], function () {
