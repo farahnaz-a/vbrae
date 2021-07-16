@@ -144,8 +144,7 @@
                     <input id="price" name="price" type="text" class="form-control form-control-lg" placeholder="Price in Euro..." />
                 </div>
                 <small class="text-muted">
-                    <i class="fas fa-chart-line"></i> Average selling price for Age
-                    of Empires IV: € 77,67</small>
+                    <i class="fas fa-chart-line"></i> Average selling price for {{ $data->name }}: € 77,67</small>
                 <div class="payment-system">
                     <h5><i class="fas fa-shield-alt me-2"></i>Secure Payment</h5>
                     <div>

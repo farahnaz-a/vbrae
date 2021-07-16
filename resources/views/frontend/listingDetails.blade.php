@@ -255,7 +255,7 @@
                       <span class="input-group-text" id="basic-addon1">€</span>
                       <input type="text" name="price" class="form-control" placeholder="">
                     </div>
-                    <small><i class="fas fa-info-circle me-1"></i>Leave blank if you want to get a notification for each DOOM listing.</small>
+                    <small><i class="fas fa-info-circle me-1"></i>Leave blank if you want to get a notification for each {{ $data->getGame->name }} listing.</small>
                   </div>
                 </div>
               </div>
