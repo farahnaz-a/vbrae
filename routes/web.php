@@ -33,6 +33,7 @@ Route::get('/filter/listing/{id}', [FrontendController::class, 'filterlisting'])
 Route::get('/region/listing/{region}', [FrontendController::class, 'regionlisting'])->name('frontend.regionlisting');
 Route::get('/price/listing/{price}', [FrontendController::class, 'pricelisting'])->name('frontend.pricelisting');
 Route::get('/listing/form/{id}', [FrontendController::class, 'listingForm'])->name('frontend.listingForm');
+Route::get('/listing/edit-form/{id}', [FrontendController::class, 'listingEditForm'])->name('frontend.listingEditForm');
 Route::get('/listing/{id}/details', [FrontendController::class, 'listingDetails'])->name('frontend.listingDetails');
 Route::get('/game/{id}/overview', [FrontendController::class, 'overview'])->name('frontend.overview');
 Route::get('/game', [FrontendController::class, 'game'])->name('frontend.game');
@@ -63,6 +64,8 @@ Route::group(['prefix' => 'admin'], function () {
     // ListingController 
     Route::get('/listings', [ListingController::class, 'index'])->name('listings.index');
     Route::post('/listing/store', [ListingController::class, 'store'])->name('listings.store');
+    Route::post('/listing/update', [ListingController::class, 'update'])->name('listings.update');
+    Route::get('/listing/{id}/delete', [ListingController::class, 'delete'])->name('listings.delete');
 
    // SalesController 
    Route::get('/sales', [SalesController::class, 'index'])->name('sales.index');

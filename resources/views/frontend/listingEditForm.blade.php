@@ -1,5 +1,7 @@
 @extends('layouts.frontend')
-
+@section('title')
+    {{ config('app.name') }} | Edit Listing
+@endsection
 @section('content')
 <div class="page-header">
     <div class="container">
@@ -24,37 +26,38 @@
                 </div>
             </div>
         </div>
-        <div class="content-footer">
+        {{-- <div class="content-footer">
             <p>
                 Game not found?
                 <a href="./add-game.html" class="add-btn ms-3"><i class="fas fa-plus me-2"></i>Add Game</a>
             </p>
-        </div>
+        </div> --}}
     </div>
-    <form action="{{ route('listings.store') }}" class="selected-section active" 
+    <form action="{{ route('listings.update') }}" class="selected-section active" 
         style="overflow: hidden; transition: 0.3s ease-in-out" method="POST">
         @csrf
+        <input type="hidden" name="id" value="{{ $data->id }}">
         <div class="page-content">
             <div class="content-header">
                 <h5>Selected Game</h5>
             </div>
             <div class="content-body">
                 <div class="selected-game">
-                    <img src="{{ asset('games') }}/{{ $data->cover }}" alt="" />
+                    <img src="{{ asset('games') }}/{{ $data->getGame->cover }}" alt="" />
                     <div>
                         <h6>{{ $data->name }}
-                            <small>{{ \Carbon\Carbon::parse($data->release_date)->format('Y') }}</small></h6>
+                            <small>{{ \Carbon\Carbon::parse($data->getGame->release_date)->format('Y') }}</small></h6>
                         <span
-                            style="background-color: {{ $data->getPlatform->color }}">{{ $data->getPlatform->name }}</span>
+                            style="background-color: {{ $data->getGame->getPlatform->color }}">{{ $data->getGame->getPlatform->name }}</span>
                     </div>
                 </div>
             </div>
-            <div class="content-footer">
+            {{-- <div class="content-footer">
                 <p>
                     <span class="reset-btn me-2"><i class="fas fa-exchange-alt me-2"></i>Reselect Game</span>
                     Warning: All inputs will be cleared!
                 </p>
-            </div>
+            </div> --}}
         </div>
         <div class="page-content search-section">
             <div class="content-header">
@@ -80,10 +83,10 @@
                     </div>
                     <div class="col-sm-6">
                         <label for="">Platform</label>
-                        <input type="hidden" name="game_id" value="{{ $data->id }}">
+                        <input type="hidden" name="game_id" value="{{ $data->game_id }}">
                         <select class="form-select mb-3">
-                               <option value="{{ $data->platform_id }}">{{ $data->getPlatform->name }}</option>
-                            @foreach (\App\Models\Platform::find($data->platform_id)->get() as $item)
+                               <option value="{{ $data->getGame->platform_id }}">{{ $data->getGame->getPlatform->name }}</option>
+                            @foreach (\App\Models\Platform::find($data->getGame->platform_id)->get() as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
                         </select>
@@ -91,6 +94,7 @@
                     <div class="col-sm-6">
                         <label for="">Digital</label>
                         <select class="form-select mb-3" name="digital">
+                            <option value="{{ \App\Models\Digital::find($data->digital)->id }}">{{ \App\Models\Digital::find($data->digital)->name }}</option>
                             @foreach (\App\Models\Digital::all() as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                             @endforeach
@@ -108,6 +112,7 @@
                     <div class="col-sm-6">
                         <label for="region">Select Region</label>
                         <select id="region" class="form-select mb-3" name="region">
+                                <option value="{{ $data->region }}">{{ $data->region }}</option>
                                 <option value="Global">Global</option>
                             @foreach (\App\Models\Country::orderBy('name', 'asc')->get() as $item)
                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
@@ -118,7 +123,7 @@
                         <label id="game_key_input">Game Key</label>
                         <div class="d-flex">
                             <textarea name="game_key" class="form-control inline" rows="3" placeholder="Use comma after every key."
-                                id="game_key_input"></textarea>
+                                id="game_key_input">{{ \App\Models\Gamekey::where('game_list_id', $data->id)->get()->pluck('game_key')->implode(', ') }}</textarea>
                         </div>
                     </div>
                     <div class="mt-3">
@@ -141,10 +146,10 @@
                 <label for="price">Select Region</label>
                 <div class="input-group">
                     <span class="input-group-text"><i class="fas fa-euro-sign"></i></span>
-                    <input id="price" name="price" type="text" class="form-control form-control-lg" placeholder="Price in Euro..." />
+                    <input id="price" name="price" type="text" class="form-control form-control-lg" value="{{ $data->price }}" placeholder="Price in Euro..." />
                 </div>
                 <small class="text-muted">
-                    <i class="fas fa-chart-line"></i> Average selling price for {{ $data->name }}: € 77,67</small>
+                    <i class="fas fa-chart-line"></i> Average selling price for {{ $data->getGame->name }}: € 77,67</small>
                 <div class="payment-system">
                     <h5><i class="fas fa-shield-alt me-2"></i>Secure Payment</h5>
                     <div>
@@ -165,7 +170,7 @@
             </div>
             <div class="my-3 text-end">
                 <button class="btn btn-green" type="submit">
-                    <i class="fas fa-plus me-2"></i>Add Listing
+                    <i class="fas fa-plus me-2"></i>Update Listing
                 </button>
             </div>
         </div>

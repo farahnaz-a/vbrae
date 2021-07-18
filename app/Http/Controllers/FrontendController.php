@@ -143,6 +143,15 @@ class FrontendController extends Controller
 
         return view('frontend.listingForm', compact('data'));
     }
+    /**
+     *  Listing form Edit
+     */
+    public function listingEditForm($id)
+    {
+        $data = Listing::find($id); 
+
+        return view('frontend.listingEditForm', compact('data'));
+    }
 
     /**
      *  Listing Details 

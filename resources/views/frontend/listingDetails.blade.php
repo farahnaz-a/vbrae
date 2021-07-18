@@ -142,8 +142,8 @@
               @auth
                   @if(Auth::id() == $data->user_id)
                   <div class="my-3">
-                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
-                    <button class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i> Edit</button>
+                    <a href="{{ route('listings.delete', $data->id) }}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
+                    <a href="{{ route('frontend.listingEditForm', $data->id) }}" class="btn btn-sm btn-secondary"><i class="fas fa-edit"></i> Edit</a>
                   </div>
                   @endif
               @endauth
@@ -206,7 +206,16 @@
               <button class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
               <button type="submit" class="btn btn-animation btn-info">
                 <span class="icon"><i class="fas fa-shopping-basket"></i></span>
+                @auth
+                @if($data->user_id == Auth::id())
+                <span class="text">Your listing</span>
+                @else
                 <span class="text">Buy</span>
+                @endif
+                @endauth
+                @guest
+                <span class="text">Buy</span>
+                @endguest
               </button>
               </form>
             </div>
