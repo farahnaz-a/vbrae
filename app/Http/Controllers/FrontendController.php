@@ -158,7 +158,7 @@ class FrontendController extends Controller
      */
     public function listing()
     {
-        return view('frontend.listings', ['listings' => Listing::paginate(30)]);
+        return view('frontend.listings', ['listings' => Listing::where('status', 0)->paginate(30)]);
     }
     /**
      *  Listing Details 
@@ -166,7 +166,7 @@ class FrontendController extends Controller
     public function filterlisting($id)
     {
         
-        return view('frontend.listings', ['listings' => Listing::where('platform_id', $id)->paginate(30)]);
+        return view('frontend.listings', ['listings' => Listing::where('platform_id', $id)->where('status', 0)->paginate(30)]);
     }
     /**
      *  Listing Details 
@@ -174,7 +174,7 @@ class FrontendController extends Controller
     public function regionlisting($region)
     {
         
-        return view('frontend.listings', ['listings' => Listing::where('region', $region)->paginate(30)]);
+        return view('frontend.listings', ['listings' => Listing::where('region', $region)->where('status', 0)->paginate(30)]);
     }
     /**
      *  Listing Details 
@@ -182,7 +182,7 @@ class FrontendController extends Controller
     public function pricelisting($price)
     {
    
-        return view('frontend.listings', ['listings' => Listing::where('price', $price)->paginate(30)]);
+        return view('frontend.listings', ['listings' => Listing::where('price', $price)->where('status', 0)->paginate(30)]);
     }
 
     /**
@@ -219,6 +219,15 @@ class FrontendController extends Controller
         $user  = User::find($id); 
 
         return view('frontend.profile', compact('user'));
+    }
+
+    /**
+     *  Buy page 
+     */
+    public function buy($id)
+    {
+        $data = Listing::find($id); 
+        return view('frontend.buy', compact('data'));
     }
 
 

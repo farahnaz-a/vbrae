@@ -104,7 +104,7 @@
                     <div class="content-header user">
                       <div>
                         <img src="{{ asset('uploads/users') }}/{{ $data->getUser->profile_photo_path }}" alt="">
-                        <a href="#">
+                        <a href="{{ route('frontend.userprofile', ['id' => $data->getUser->id, 'name' => $data->getUser->name]) }}">
                           <h6>{{ $data->getUser->name }}</h6>
                           {{-- <img src="./assets/images/flags/PK.svg" width="14" alt=""> --}}
                           {{-- <small>US, New York City <span class="text-muted">10001</span></small> --}}

@@ -8,7 +8,7 @@
 
 @section('content')
 <section class="product">
-    <div class="blur-bg"></div>
+    <div class="blur-bg" style="background: linear-gradient(0deg, #191818 30%, rgba(25,24,24,0) 80%),url({{ asset('uploads/users') }}/{{ $user->profile_photo_path }}) center center no-repeat !important;"></div>
     <div class="bg-color" style="top: 50%"></div>
     <div class="container" style="position: relative">
       <div class="profile">

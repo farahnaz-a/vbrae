@@ -43,6 +43,7 @@ Route::post('/wishlist-store', [WishListController::class, 'store'])->name('wish
 Route::get('/notification/{id}/seen', [NotificationController::class, 'seen'])->name('notification.seen');
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.index');
 Route::get('/user-profile/{id}/{name}', [FrontendController::class, 'userprofile'])->name('frontend.userprofile');
+Route::get('/buy/{id}', [FrontendController::class, 'buy'])->name('frontend.buy');
 
 // AdminController 
 Route::group(['prefix' => 'admin'], function () {
