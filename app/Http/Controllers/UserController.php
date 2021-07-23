@@ -23,7 +23,7 @@ class UserController extends Controller
    public function index()
    {
        return view('users.index', [
-           'listings' => Listing::where('user_id', Auth::id())->where('status', 0)->get(),
+           'listings' => Listing::where('user_id', Auth::id())->get(),
        ]);
    }
 

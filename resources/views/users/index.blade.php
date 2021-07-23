@@ -57,9 +57,21 @@
           <div class="price"><span>€ {{ $item->price }}</span></div>
         </div>
         <div class="panel-body">
+          @if($item->status == 0)
           <span class="no-data"
-            ><i class="far fa-frown me-2"></i>Currently active.</span
+          ><i class="far fa-frown me-2"></i>Currently active.</span
+        >
+        @elseif($item->status == 1)
+         @if(\App\Models\Gamekey::where('game_list_id', $item->id)->doesntExist())
+         <span class="no-data"
+         ><i class="far fa-frown me-2"></i>Please update game keys. This listing is sold.</span
           >
+          @else
+          <span class="no-data"
+          ><i class="far fa-frown me-2"></i>Completed.</span
+        >
+         @endif
+          @endif
         </div>
         <div class="panel-footer">
           <small
@@ -67,8 +79,16 @@
             clicks</small
           >
           <div class="actions">
-            <span><i class="fas fa-trash me-2"></i>Delete</span>
-            <span><i class="fas fa-edit me-2"></i>Edit</span>
+            <span>
+              <a style="color : white;" href="{{ route('listings.delete', $item->id) }}">
+              <i class="fas fa-trash me-2"></i>Delete
+              </a>
+            </span>
+             <span>
+              <a style="color : white;" href="{{ route('frontend.listingEditForm', $item->id) }}">
+               <i class="fas fa-edit me-2"></i>Edit
+              </span> 
+              </a> 
             <span>
                 <a href="{{ route('frontend.listingDetails', $item->id) }}"><i class="fas fa-caret-square-right me-2"></i>Details</a>
             </span>

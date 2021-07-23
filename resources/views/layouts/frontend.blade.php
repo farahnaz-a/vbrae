@@ -8,7 +8,7 @@
     <title>@yield('title')</title>
 
     <link rel="shortcut icon" href="{{ asset('frontend_assets/assets/images/favicon-32x32.png') }}" />
-
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <!-- popper js -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"

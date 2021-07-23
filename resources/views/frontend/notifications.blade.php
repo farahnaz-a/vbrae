@@ -52,7 +52,11 @@
                         <i class="fas fa-money-bill"></i>
                         @endif
                     </span>
+                   @if($item->game_id)
                     <img src="{{ asset('games') }}/{{ \App\Models\Games::where('id', $item->game_id)->first()->cover }}" alt="" />
+                    @elseif($item->listing_id)
+                    <img src="{{ asset('games') }}/{{ \App\Models\Listing::where('id', $item->listing_id)->first()->getGame->cover }}" alt="" />
+                  @endif 
                   </div>
                   <div class="right">
                     <p>{{ $item->message }}</p>

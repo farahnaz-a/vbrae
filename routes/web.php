@@ -2,16 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GenreController;
-use App\Http\Controllers\DigitalController;
-use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\ListingController;
-use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\SalesController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\StripeController;
+use App\Http\Controllers\DigitalController;
+use App\Http\Controllers\ListingController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\WishListController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,9 @@ Route::post('/wishlist-store', [WishListController::class, 'store'])->name('wish
 Route::get('/notification/{id}/seen', [NotificationController::class, 'seen'])->name('notification.seen');
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.index');
 Route::get('/user-profile/{id}/{name}', [FrontendController::class, 'userprofile'])->name('frontend.userprofile');
-Route::get('/buy/{id}', [FrontendController::class, 'buy'])->name('frontend.buy');
+Route::get('/buy/{id}', [FrontendController::class, 'buy'])->middleware('auth')->name('frontend.buy');
+Route::post('/checkout', [FrontendController::class, 'checkout'])->name('frontend.checkout');
+Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
 // AdminController 
 Route::group(['prefix' => 'admin'], function () {

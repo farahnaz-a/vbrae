@@ -58,7 +58,7 @@ class ListingController extends Controller
             'digital'      => $request->digital,
         ]);
 
-        if($request->has('game_key'))
+        if($request->game_key)
         {
             $keys = explode(',' , $request->game_key); 
             foreach($keys as $item)

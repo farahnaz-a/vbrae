@@ -196,7 +196,7 @@
                 <p class="text-success mb-0"><small><i class="fas fa-check"></i>{{ ($data->region == 'Global') ? ' This game key can be activated in any country !' : ' This game key can be activated in '. $data->region . '!' }}</small></p>
                 <p class="text-danger"><small><i class="fas fa-ban"></i> This is not refundable because its a digital item.</small></p>
                 <div class="form-check">
-                    <form action="">
+                    <form action="{{ route('frontend.buy', $data->id) }}" method="GET">
                   <input id="agree" class="form-check-input" type="checkbox" value="" required>
                   <label class="form-check-label" for="agree">I agree</label>
                 </div>
@@ -204,19 +204,26 @@
             </div>
             <div class="modal-footer">
               <button class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
-              <button type="submit" class="btn btn-animation btn-info">
+              @auth
+              @if($data->user_id == Auth::id())
+              <button type="button" class="btn btn-animation btn-info">
                 <span class="icon"><i class="fas fa-shopping-basket"></i></span>
-                @auth
-                @if($data->user_id == Auth::id())
                 <span class="text">Your listing</span>
+              </button>
                 @else
+                <button type="submit" class="btn btn-animation btn-info">
+                  <span class="icon"><i class="fas fa-shopping-basket"></i></span>
                 <span class="text">Buy</span>
+              </button>
                 @endif
                 @endauth
                 @guest
+                <button type="submit" class="btn btn-animation btn-info">
+                  <span class="icon"><i class="fas fa-shopping-basket"></i></span>
                 <span class="text">Buy</span>
-                @endguest
               </button>
+                @endguest
+           
               </form>
             </div>
           </div>

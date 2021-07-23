@@ -19,6 +19,13 @@ use MarcReichel\IGDBLaravel\Models\Platform as Plat;
 class FrontendController extends Controller
 {
     /**
+     *  Constructor 
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->only('buy');
+    }
+    /**
      *  Home Page 
      */
     public function index()
@@ -228,6 +235,16 @@ class FrontendController extends Controller
     {
         $data = Listing::find($id); 
         return view('frontend.buy', compact('data'));
+    }
+
+    public function checkout(Request $request)
+    {
+
+        $data = Listing::find($request->id); 
+        
+        return view('frontend.checkout', compact('data'));
+
+
     }
 
 
