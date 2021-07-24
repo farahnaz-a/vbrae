@@ -262,6 +262,24 @@
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>
                 </li> 
+              <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Footer</span><i data-feather="more-horizontal"></i>
+                </li>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('gamingconsoles.index') }}"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Gaming console</span></a>
+                </li> 
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('footerFirstRows.index') }}"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">First Row</span></a>
+                </li> 
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('footerSells.index') }}"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Sell</span></a>
+                </li> 
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('footerBuys.index') }}"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Buy</span></a>
+                </li> 
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('footerResources.index') }}"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Resource</span></a>
+                </li> 
+                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Community</span></a>
+                </li> 
+                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Menu</span></a>
+                </li> 
+                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Payment Method</span></a>
+                </li> 
              </ul>
         </div>
     </div>

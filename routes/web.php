@@ -8,8 +8,13 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\DigitalController;
+use App\Http\Controllers\FooterBuyController;
+use App\Http\Controllers\FooterFirstRowController;
+use App\Http\Controllers\FooterResourceController;
+use App\Http\Controllers\FooterSellController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\GamingConsoleController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\WishListController;
 use App\Http\Controllers\NotificationController;
@@ -73,6 +78,18 @@ Route::group(['prefix' => 'admin'], function () {
 
    // SalesController 
    Route::get('/sales', [SalesController::class, 'index'])->name('sales.index');
+
+   // GamingController 
+   Route::resource('gamingconsoles', GamingConsoleController::class);
+   // FooterFirstRowController 
+   Route::resource('footerFirstRows', FooterFirstRowController::class);
+   // FooterSellController 
+   Route::resource('footerSells', FooterSellController::class);
+   // FooterBuyController 
+   Route::resource('footerBuys', FooterBuyController::class);
+   // FooterResourceController 
+   Route::resource('footerResources', FooterResourceController::class);
+
 
 
 // END Admin Route Group   
