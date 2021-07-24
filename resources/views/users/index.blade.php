@@ -98,7 +98,7 @@
        @endforeach
       <div class="text-center my-3">
         @if($listings->count() > 3)
-        <a href="#" class="btn btn-sm btn-secondary"
+        <a href="{{ route('frontend.listing') }}" class="btn btn-sm btn-secondary"
           >Show {{ $listings->count() - 3 }} more active listings</a
         >
         @endif
@@ -111,80 +111,72 @@
       <div class="dash-title">
         <h4>
           <i class="fas fa-briefcase me-2"></i> You Bought
-          <small class="badge bg-secondary ms-2">224</small>
+          <small class="badge bg-secondary ms-2">{{ \App\Models\Sale::where('user_id', Auth::id())->count() }}</small>
         </h4>
-        <a href="./dash-listing.html"
-          ><i class="fas fa-angle-right me-2"></i>Show All</a
-        >
+     
       </div>
-      {{-- <div class="dash-panel">
-        <div class="panel-header">
-          <div class="game">
-            <img src="./assets/images/games/game-1.jpg" alt="" />
-            <div>
-              <h6>Stonefly</h6>
-              <span style="background-color: #e60012; color: #fff"
-                >Nintendo Switch
-              </span>
-            </div>
-          </div>
-          <!-- <div class="price">
-            <span>€ 5,00</span>
-          </div> -->
-        </div>
-        <div class="panel-body">
-          <ul class="custom-table">
-            <li>
-              <div class="table-content">
-                <div class="left">
-                  <div class="type">
-                    <span class="primary">€ 0,15</span>
-                  </div>
-                </div>
-                <div class="center">
-                  <div class="left-col">
-                    <i class="fas fa-truck"></i>
-                  </div>
-                  <a href="./user.html" class="right-col">
-                    <img src="./assets/images/admin.jpg" alt="" />
-                    <div>
-                      <h6 class="title">Mohammad Sayem</h6>
-                      <small class="text-muted"
-                        ><img
-                          class="img-fluid me-2"
-                          style="width: 14px; height: 14px; object-fit: cover"
-                          src="./assets/images/flags/PK.svg"
-                          alt=""
-                        />
-                        PK, Abbottabad Gpo
-                      </small>
+      <div class="dash-panel">
+        @foreach (\App\Models\Sale::where('user_id', Auth::id())->get() as $item)
+            @php
+                $listing = \App\Models\Listing::find($item->listing_id); 
+            @endphp
+                    <div class="panel-header">
+                      <div class="game">
+                        <img src="{{ asset('games') }}/{{ $listing->getGame->cover }}" alt="" />
+                        <div>
+                          <h6>{{ $listing->getGame->name }}</h6>
+                          <span style="color:white; background-color: {{ $listing->getGame->getPlatform->color }}">{{ $listing->getGame->getPlatform->name }}</span>
+                        </div>
+                      </div>
+                      <div class="price">
+                        <span>€ {{ $listing->price }}</span>
+                      </div> 
                     </div>
-                  </a>
-                </div>
-                <div class="right">
-                  <a href="./details.html" class="primary"
-                    ><i class="fa fa-thumbs-up me-2"></i>
-                    <span class="d-none d-sm-inline"
-                      >Rate BenaliZakaria</span
-                    ></a
-                  >
-                </div>
-              </div>
-              <div class="pluse danger">
-                <i class="fas fa-exclamation"></i>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="panel-footer">
-          <small>1 WEEK AGO </small>
-          <div class="actions">
-            <span><i class="fas fa-caret-square-right me-2"></i>Details</span>
-          </div>
-        </div>
-      </div> --}} 
+                    <div class="panel-body">
+                      <ul class="custom-table">
+                        <li>
+                          <div class="table-content">
+                            {{-- <div class="left">
+                              <div class="type">
+                                <span class="primary">€ 0,15</span>
+                              </div>
+                            </div> --}}
+                            <div class="center">
+                              <div class="left-col">
+                                <i class="fas fa-truck"></i>
+                              </div>
+                              <a href="{{ route('frontend.userprofile', array('id' => $item->user_id, 'name' => \App\Models\User::find($item->user_id)->name)) }}" class="right-col">
+                                <img src="{{ asset('uploads/users') }}/{{ \App\Models\User::find($item->user_id)->profile_photo_path }}" alt="" />
+                                <div>
+                                  <h6 class="title">{{ \App\Models\User::find($item->user_id)->name }}</h6>
+                                </div>
+                              </a>
+                            </div>
+                            <div class="right">
+                              <a href="./details.html" class="primary"
+                                ><i class="fa fa-thumbs-up me-2"></i>
+                                <span class="d-none d-sm-inline"
+                                  >Rate {{ \App\Models\User::find($listing->user_id)->name }}</span
+                                ></a
+                              >
+                            </div>
+                          </div>
+                          {{-- <div class="pluse danger">
+                            <i class="fas fa-exclamation"></i>
+                          </div> --}}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="panel-footer">
+                      <small>{{ $item->created_at->diffForHumans() }} </small>
+                      <div class="actions">
+                        <span><i class="fas fa-caret-square-right me-2"></i>Details</span>
+                      </div>
+                    </div>
+        @endforeach
+      </div> 
 
-       <h4>You did not make any purchase yet.</h4>
+       {{-- <h4>You did not make any purchase yet.</h4> --}}
 
       <div class="text-center my-3">
         <a href="{{ route('frontend.listing') }}" class="btn btn-sm btn-secondary"
