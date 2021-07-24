@@ -63,11 +63,11 @@
         >
         @elseif($item->status == 1)
          @if(\App\Models\Gamekey::where('game_list_id', $item->id)->doesntExist())
-         <span class="no-data"
+         <span class="no-data text-warning"
          ><i class="far fa-frown me-2"></i>Please update game keys. This listing is sold.</span
           >
           @else
-          <span class="no-data"
+          <span class="no-data text-success"
           ><i class="far fa-frown me-2"></i>Completed.</span
         >
          @endif

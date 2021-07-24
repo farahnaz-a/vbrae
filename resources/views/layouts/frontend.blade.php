@@ -229,7 +229,7 @@
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="./listing.html"
+                  <a class="dropdown-item" href="{{ route('frontend.userprofile', array('id' => Auth::id(), 'name' => Auth::user()->name)) }}"
                     ><i class="fas fa-tags"></i>Listings</a
                   >
                 </li>

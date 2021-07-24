@@ -26,7 +26,7 @@ class StripeController extends Controller
     public function stripePost(Request $request)
     {
         $listing = Listing::find($request->listing_id);
-        Stripe\Stripe::setApiKey('sk_test_firDb2BrvwKsLBZBcsv70lWJ00e8vefitV');
+        Stripe\Stripe::setApiKey('sk_test_sY9or43olY55fF4klGiYjXd200EaVrrfk7');
         Stripe\Charge::create ([
                 "amount" =>  $listing->price * 100,
                 "currency" => "eur",

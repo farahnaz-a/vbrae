@@ -41,7 +41,7 @@
                             method="post"
                             class="require-validation"
                             data-cc-on-file="false"
-                            data-stripe-publishable-key="pk_test_JI1oswkOtt37AbIiGwNB6kYC003I2xAVKx"
+                            data-stripe-publishable-key="pk_test_ID5KVh2hjOt4BDAxM6Gw5DfL00hCH1GJEd"
                             id="payment-form">
                             @csrf
                             <div class='form-row row'>
