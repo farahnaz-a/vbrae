@@ -3,6 +3,10 @@
 @section('title')
     {{ config('app.name') }} - Resource
 @endsection
+
+@section('footerResources')
+    active
+@endsection
            
 @section('breadcrumb')
 <div class="content-header-left col-md-9 col-12 mb-2">
@@ -13,9 +17,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a>
                     </li>
-                    {{-- <li class="breadcrumb-item"><a href="#">Layouts</a>
-                    </li>
-                    <li class="breadcrumb-item active">Admin Dashboard
+                    {{-- <li class="breadcrumb-item active">Admin Dashboard
                     </li> --}}
                 </ol>
             </div>

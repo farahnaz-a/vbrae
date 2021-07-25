@@ -3,6 +3,10 @@
 @section('title')
     {{ config('app.name') }} - First Row
 @endsection
+
+@section('footerFirstRows')
+    active
+@endsection
            
 @section('breadcrumb')
 <div class="content-header-left col-md-9 col-12 mb-2">
@@ -48,7 +52,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="mobile_app_1">First Row App 1</label>
+                                <label for="mobile_app_1">Mobile App 1</label>
                                 <div class="custom-file">
                                     <input type="file" name="mobile_app_1" class="custom-file-input" id="mobile_app_1">
                                     <label class="custom-file-label" for="mobile_app_1">Choose Image</label>
@@ -60,7 +64,7 @@
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="mobile_app_2">First Row App 2</label>
+                                <label for="mobile_app_2">Mobile App 2</label>
                                 <div class="custom-file">
                                     <input type="file" name="mobile_app_2" class="custom-file-input" id="mobile_app_2">
                                     <label class="custom-file-label" for="mobile_app_2">Choose Image</label>

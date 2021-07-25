@@ -3,6 +3,10 @@
 @section('title')
     {{ config('app.name') }} - Buy
 @endsection
+
+@section('footerBuys')
+    active
+@endsection
            
 @section('breadcrumb')
 <div class="content-header-left col-md-9 col-12 mb-2">
@@ -13,7 +17,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a>
                     </li>
-                    <li class="breadcrumb-item active"><a href="#">Edit</a>
+                    <li class="breadcrumb-item active">Edit
                     </li>
                 </ol>
             </div>

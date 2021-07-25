@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 
 class FooterSellController extends Controller
 {
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('verified');
+        $this->middleware('checkrole');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -85,6 +96,12 @@ class FooterSellController extends Controller
      */
     public function update(Request $request, FooterSell $footerSell)
     {
+         //form validation
+         $request -> validate([
+            'sell_item'    => 'required',
+            'link'         => 'required',
+        ]);
+        
         // Update Fields
         $footerSell->sell_item  = $request->sell_item;
         $footerSell->link       = $request->link;
@@ -92,7 +109,7 @@ class FooterSellController extends Controller
         // Save Everything in database 
         $footerSell->save(); 
 
-         // Return Back to Banner List With Success Session Message
+         // Return Back With Success Session Message
         return redirect()->route('footerSells.index')->withSuccess('Updated successfully');
     }
 

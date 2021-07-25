@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 
 class FooterResourceController extends Controller
 {
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('verified');
+        $this->middleware('checkrole');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -84,6 +95,12 @@ class FooterResourceController extends Controller
      */
     public function update(Request $request, FooterResource $footerResource)
     {
+        //form validation
+        $request -> validate([
+            'resource_item'  => 'required',
+            'link'           => 'required',
+        ]);
+        
         // Update Fields
         $footerResource->resource_item   = $request->resource_item;
         $footerResource->link            = $request->link;
@@ -91,7 +108,7 @@ class FooterResourceController extends Controller
         // Save Everything in database 
         $footerResource->save(); 
 
-         // Return Back to Banner List With Success Session Message
+         // Return Back With Success Session Message
         return redirect()->route('footerResources.index')->withSuccess('Updated successfully');
     }
 

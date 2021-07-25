@@ -3,6 +3,10 @@
 @section('title')
     {{ config('app.name') }} - Gaming Console
 @endsection
+
+@section('gamingconsoles')
+    active
+@endsection
            
 @section('breadcrumb')
 <div class="content-header-left col-md-9 col-12 mb-2">

@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 
 class FooterFirstRowController extends Controller
 {
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('verified');
+        $this->middleware('checkrole');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CommunityIconController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\DigitalController;
 use App\Http\Controllers\FooterBuyController;
 use App\Http\Controllers\FooterFirstRowController;
+use App\Http\Controllers\FooterMenuController;
 use App\Http\Controllers\FooterResourceController;
 use App\Http\Controllers\FooterSellController;
 use App\Http\Controllers\ListingController;
@@ -18,6 +20,7 @@ use App\Http\Controllers\GamingConsoleController;
 use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\WishListController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PaymentGatewayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +92,12 @@ Route::group(['prefix' => 'admin'], function () {
    Route::resource('footerBuys', FooterBuyController::class);
    // FooterResourceController 
    Route::resource('footerResources', FooterResourceController::class);
+   // CommuintyIconController 
+   Route::resource('communityIcons', CommunityIconController::class);
+   // FooterMenuController 
+   Route::resource('footerMenus', FooterMenuController::class);
+   // PaymentgatewayController 
+   Route::resource('paymentGateways', PaymentGatewayController::class);
 
 
 

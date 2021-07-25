@@ -13,7 +13,8 @@
     <link rel="apple-touch-icon" href="">
     <link rel="shortcut icon" type="image/x-icon" href="">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    
     <!-- BEGIN: Vendor CSS-->
      
     <link rel="stylesheet" type="text/css" href=" {{ asset('dashboard_assets/app-assets/vendors/css/vendors.min.css') }}">
@@ -264,21 +265,21 @@
                 </li> 
               <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Footer</span><i data-feather="more-horizontal"></i>
                 </li>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('gamingconsoles.index') }}"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Gaming console</span></a>
+                <li class="@yield('gamingconsoles') nav-item"><a class="d-flex align-items-center" href="{{ route('gamingconsoles.index') }}"><i data-feather='aperture'></i><span class="menu-title text-truncate" data-i18n="Email">Gaming console</span></a>
                 </li> 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('footerFirstRows.index') }}"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">First Row</span></a>
+                <li class="@yield('footerFirstRows') nav-item"><a class="d-flex align-items-center" href="{{ route('footerFirstRows.index') }}"><i data-feather='bar-chart-2'></i><span class="menu-title text-truncate" data-i18n="Email">First Row</span></a>
                 </li> 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('footerSells.index') }}"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Sell</span></a>
+                <li class="@yield('footerSells') nav-item"><a class="d-flex align-items-center" href="{{ route('footerSells.index') }}"><i data-feather='archive'></i><span class="menu-title text-truncate" data-i18n="Email">Sell</span></a>
                 </li> 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('footerBuys.index') }}"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Buy</span></a>
+                <li class="@yield('footerBuys') nav-item"><a class="d-flex align-items-center" href="{{ route('footerBuys.index') }}"><i data-feather='database'></i><span class="menu-title text-truncate" data-i18n="Email">Buy</span></a>
                 </li> 
-                <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('footerResources.index') }}"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Resource</span></a>
+                <li class="@yield('footerResources') nav-item"><a class="d-flex align-items-center" href="{{ route('footerResources.index') }}"><i data-feather='codesandbox'></i><span class="menu-title text-truncate" data-i18n="Email">Resource</span></a>
                 </li> 
-                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Community</span></a>
+                <li class="@yield('communityIcons') nav-item"><a class="d-flex align-items-center" href="{{ route('communityIcons.index') }}"><i data-feather='command'></i><span class="menu-title text-truncate" data-i18n="Email">Community</span></a>
                 </li> 
-                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Menu</span></a>
+                <li class="@yield('footerMenus') nav-item"><a class="d-flex align-items-center" href="{{ route('footerMenus.index') }}"><i data-feather='folder-plus'></i><span class="menu-title text-truncate" data-i18n="Email">Menu</span></a>
                 </li> 
-                <li class=" nav-item"><a class="d-flex align-items-center" href=""><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Payment Method</span></a>
+                <li class="@yield('paymentGateways') nav-item"><a class="d-flex align-items-center" href="{{ route('paymentGateways.index') }}"><i data-feather='dollar-sign'></i><span class="menu-title text-truncate" data-i18n="Email">Payment Gateway</span></a>
                 </li> 
              </ul>
         </div>
