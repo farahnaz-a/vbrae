@@ -34,15 +34,19 @@
               <div class="review">
                 <div class="rating-percent">
                   <i class="fas fa-thumbs-up text-success"></i>
-                  100%
+                  @if(\App\Models\UserRating::where('user_id', $user->id)->exists())
+                  {{ (positive($user->id)->count()/totalrating($user->id)->count()) * 100 }}%
+                  @else 
+                  NA
+                  @endif
                 </div>
                 <div class="rating-counts">
                   <span class="text-danger">
-                    <i class="fa fa-thumbs-down" aria-hidden="true"></i>0
+                    <i class="fa fa-thumbs-down" aria-hidden="true"></i>{{ negative($user->id)->count() }}
                   </span>
-                  <i class="fa fa-minus" aria-hidden="true"></i> 0
+                  <i class="fa fa-minus" aria-hidden="true"></i> 
                   <span class="text-success"
-                    ><i class="fa fa-thumbs-up" aria-hidden="true"></i> 24
+                    ><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ positive($user->id)->count() }}
                   </span>
                 </div>
               </div>

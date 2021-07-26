@@ -36,7 +36,7 @@ class StripeController extends Controller
 
         $listing->status = 1; 
         $listing->save();
-        Sale::create([
+        $sale = Sale::create([
             'user_id'    => Auth::id(), 
             'listing_id' => $request->listing_id, 
             'price'      => $listing->price,
@@ -77,6 +77,6 @@ class StripeController extends Controller
 
         Session::flash('success', 'Payment successful!');
            
-        return redirect('/')->withSuccess('Your payment was successful.' );
+        return redirect()->route('frontend.orderDetails', $sale->id)->withSuccess('Your payment was successful.' );
     }
 }

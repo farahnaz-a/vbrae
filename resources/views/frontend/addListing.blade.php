@@ -37,7 +37,7 @@
         <div class="content-footer">
           <p>
             Game not found?
-            <a href="./add-game.html" class="add-btn ms-3"
+            <a href="{{ route('frontend.addGame') }}" class="add-btn ms-3"
               ><i class="fas fa-plus me-2"></i>Add Game</a
             >
           </p>

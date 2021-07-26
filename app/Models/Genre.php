@@ -13,6 +13,6 @@ class Genre extends Model
 
     public function getGames()
     {
-        return $this->hasMany('App\Models\Game', 'genre_id', 'id');
+        return $this->hasMany('App\Models\Games', 'genre_id', 'id');
     }
 }

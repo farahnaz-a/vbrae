@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Mail;
 use Auth; 
 use Carbon\Carbon;
+use App\Models\Sale;
 use App\Models\User;
 use App\Models\Games;
 use App\Models\GameKey;
@@ -151,7 +152,7 @@ class ListingController extends Controller
         {
             $keys = explode(',' , $request->game_key); 
 
-            foreach(Gamekey::where('game_list_id', $request->id)->get() as $existing)
+            foreach(GameKey::where('game_list_id', $request->id)->get() as $existing)
             {
                 $existing->delete(); 
             }
@@ -168,52 +169,55 @@ class ListingController extends Controller
 
         $wishes = WishList::where('game_id', $request->game_id)->where('notification', 'yes')->get();
 
-        foreach($wishes as $wish)
+        if(Sale::where('listing_id' , $listing->id)->doesntExist())
         {
-            if($wish->price)
+            foreach($wishes as $wish)
             {
-              if($request->price <= $wish->price)
-              {
-
-                $url  = route('frontend.listingDetails', $listing->id);
-                $game = Games::find($request->game_id)->name; 
-
-                Notification::create([
-                    'message'    => $game . ' listing is now updated.', 
-                    'url'        => $url,
-                    'game_id'    => $request->game_id,
-                    'listing_id' => $listing->id,
-                    'user_id'    => $wish->user_id,
-                    'type'       => 'wishlist',
-                    'created_at' => Carbon::now(),
-                ]);
-
-                Mail::to(User::find($wish->user_id)->email)->send(new WishListMailer($url, $game));
-              }
+                if($wish->price)
+                {
+                  if($request->price <= $wish->price)
+                  {
+    
+                    $url  = route('frontend.listingDetails', $listing->id);
+                    $game = Games::find($request->game_id)->name; 
+    
+                    Notification::create([
+                        'message'    => $game . ' listing is now updated.', 
+                        'url'        => $url,
+                        'game_id'    => $request->game_id,
+                        'listing_id' => $listing->id,
+                        'user_id'    => $wish->user_id,
+                        'type'       => 'wishlist',
+                        'created_at' => Carbon::now(),
+                    ]);
+    
+                    Mail::to(User::find($wish->user_id)->email)->send(new WishListMailer($url, $game));
+                  }
+                }
+                else 
+                {
+    
+    
+                    $url = route('frontend.listingDetails', $listing->id);
+                    $game = Games::find($request->game_id)->name; 
+                    Notification::create([
+                        'message'    => $game . ' listing is now updated.', 
+                        'url'        => $url,
+                        'game_id'    => $request->game_id,
+                        'listing_id' => $listing->id,
+                        'user_id'    => $wish->user_id,
+                        'type'       => 'wishlist',
+                        'created_at' => Carbon::now(),
+                    ]);
+    
+                    Mail::to(User::find($wish->user_id)->email)->send(new WishListMailer($url, $game));
+    
+    
+                }
+    
+              
+    
             }
-            else 
-            {
-
-
-                $url = route('frontend.listingDetails', $listing->id);
-                $game = Games::find($request->game_id)->name; 
-                Notification::create([
-                    'message'    => $game . ' listing is now updated.', 
-                    'url'        => $url,
-                    'game_id'    => $request->game_id,
-                    'listing_id' => $listing->id,
-                    'user_id'    => $wish->user_id,
-                    'type'       => 'wishlist',
-                    'created_at' => Carbon::now(),
-                ]);
-
-                Mail::to(User::find($wish->user_id)->email)->send(new WishListMailer($url, $game));
-
-
-            }
-
-          
-
         }
         return redirect('/')->withSuccess('Listing updated');
     }
@@ -223,6 +227,11 @@ class ListingController extends Controller
      */
     public function delete($id)
     {
+        $sales = Sale::where('listing_id', $id)->get(); 
+        foreach($sales as $sale)
+        {
+            $sale->delete();
+        }
         Listing::find($id)->delete(); 
 
         return redirect('/')->withSuccess('Listing deleted');

@@ -95,16 +95,15 @@
             <ul class="nav navbar-nav align-items-center ml-auto">
               
                 <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon" data-feather="moon"></i></a></li>
-                <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>
+                {{-- <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>
                     <div class="search-input">
                         <div class="search-input-icon"><i data-feather="search"></i></div>
                         <input class="form-control input" type="text" placeholder="Explore Vuexy..." tabindex="-1" data-search="search">
                         <div class="search-input-close"><i data-feather="x"></i></div>
                         <ul class="search-list search-list-main"></ul>
                     </div>
-                </li>
-               
-                <li class="nav-item dropdown dropdown-notification mr-25"><a class="nav-link" href="javascript:void(0);" data-toggle="dropdown"><i class="ficon" data-feather="bell"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
+                </li> --}}
+                    {{-- <li class="nav-item dropdown dropdown-notification mr-25"><a class="nav-link" href="javascript:void(0);" data-toggle="dropdown"><i class="ficon" data-feather="bell"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
                     <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                         <li class="dropdown-menu-header">
                             <div class="dropdown-header d-flex">
@@ -185,9 +184,10 @@
                         </li>
                         <li class="dropdown-menu-footer"><a class="btn btn-primary btn-block" href="javascript:void(0)">Read all notifications</a></li>
                     </ul>
-                </li>
+                </li> --}}
+           
                 <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="user-nav d-sm-flex d-none"><span class="user-name font-weight-bolder">{{ Auth::user()->name }}</span><span class="user-status">Admin</span></div><span class="avatar"><img class="round" src="{{ asset('dashboard_assets/app-assets/images/portrait/small/avatar-s-11.jpg') }}" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
+                        <div class="user-nav d-sm-flex d-none"><span class="user-name font-weight-bolder">{{ Auth::user()->name }}</span><span class="user-status">Admin</span></div><span class="avatar"><img class="round" src="{{ asset('uploads/users') }}/{{ Auth::user()->profile_photo_path }}" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user"><a class="dropdown-item" href="{{ url('/user/profile') }}"><i class="mr-50" data-feather="user"></i> Profile</a>
                         <form method="POST" action="{{ route('logout') }}">
@@ -258,10 +258,6 @@
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('listings.index') }}"><i data-feather='align-left'></i><span class="menu-title text-truncate" data-i18n="games">Listings</span></a>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="{{ route('sales.index') }}"><i data-feather='link-2'></i><span class="menu-title text-truncate" data-i18n="genres">Sales</span></a>
-                </li> 
-              <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Banner &amp; Pages</span><i data-feather="more-horizontal"></i>
-                </li>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>
                 </li> 
               <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Footer</span><i data-feather="more-horizontal"></i>
                 </li>

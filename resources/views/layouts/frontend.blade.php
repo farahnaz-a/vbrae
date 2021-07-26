@@ -64,7 +64,7 @@
         <div class="left-header">
           <div class="menu"><i class="fas fa-bars"></i></div>
           <a href="/" class="logo">
-            <img src="{{ asset('frontend_assets/assets/images/logo.png') }}" alt="" />
+            <img src="{{ asset('uploads/footerfirstrows') }}/{{ firstRows()->logo }}" alt="" />
           </a>
           <div class="ellipsis"><i class="fas fa-ellipsis-v"></i></div>
           <ul>
@@ -217,11 +217,11 @@
               </li>
               <li><hr class="dropdown-divider" /></li>
                @endif
-                <li>
+                {{-- <li>
                   <a class="dropdown-item" href="./balance.html"
                     ><i class="fas fa-money-bill"></i>€ 612,72</a
                   >
-                </li>
+                </li> --}}
                 <li><hr class="dropdown-divider" /></li>
                 <li>
                   <a class="dropdown-item" href="{{ route('user.dashboard', Str::slug(Auth::user()->name)) }}"
@@ -550,45 +550,16 @@
        <footer class="one">
         <div class="container-fluid platforms">
           <div class="row">
-            <a href="#" class="col-6 col-sm-4 col-md-4 col-lg-2 text-center">
+             @foreach(consoles() as $key => $value)
+                 <a href="#" class="col-6 col-sm-4 col-md-4 col-lg-2 text-center">
               <img
               
-                src="{{ asset('frontend_assets/assets/images/ps3_tiny.png') }}"
+                src="{{ asset('uploads/gamingconsoles') }}/{{ $value->image }}"
                 class="img-fluid"
                 alt="PlayStation 3"
               />
             </a>
-            <a href="#" class="col-6 col-sm-4 col-md-4 col-lg-2 text-center">
-              <img src="{{ asset('frontend_assets/assets/images/pc_tiny.png') }}" class="img-fluid" alt="PC" />
-            </a>
-            <a href="#" class="col-6 col-sm-4 col-md-4 col-lg-2 text-center">
-              <img
-                src="{{ asset('frontend_assets/assets/images/xboxone_tiny.png') }}"
-                class="img-fluid"
-                alt="Xbox One"
-              />
-            </a>
-            <a href="#" class="col-6 col-sm-4 col-md-4 col-lg-2 text-center">
-              <img
-                src="{{ asset('frontend_assets/assets/images/ps4_tiny.png') }}"
-                class="img-fluid"
-                alt="PlayStation 4"
-              />
-            </a>
-            <a href="#" class="col-6 col-sm-4 col-md-4 col-lg-2 text-center">
-              <img
-                src="{{ asset('frontend_assets/assets/images/xbox360_tiny.png') }}"
-                class="img-fluid"
-                alt="Xbox 360"
-              />
-            </a>
-            <a href="#" class="col-6 col-sm-4 col-md-4 col-lg-2 text-center">
-              <img
-                src="{{ asset('frontend_assets/assets/images/wii-u_tiny.png') }}"
-                class="img-fluid"
-                alt="Wii U"
-              />
-            </a>
+             @endforeach
           </div>
         </div>
         <div class="container">
@@ -596,21 +567,21 @@
             <div class="col-md-6 col-lg-4">
               <div class="footer-item">
                 <a href="/" class="logo mb-4 d-inline-block">
-                  <img src="{{ asset('frontend_assets/assets/images/logo.png') }}" alt="" />
+                  <img src="{{ asset('uploads/footerfirstrows') }}/{{ firstRows()->logo }}" alt="" />
                 </a>
                 <p>Our Mobile Apps</p>
                 <div class="d-flex">
                   <div class="me-2">
                     <img
                       class="img-fluid"
-                      src="{{ asset('frontend_assets/assets/images/download-apple.png') }}"
+                      src="{{ asset('uploads/footerfirstrows') }}/{{ firstRows()->mobile_app_1 }}"
                       alt=""
                     />
                   </div>
                   <div class="ms-2">
                     <img
                       class="img-fluid"
-                      src="{{ asset('frontend_assets/assets/images/download-google.png') }}"
+                      src="{{ asset('uploads/footerfirstrows') }}/{{ firstRows()->mobile_app_2 }}"
                       alt=""
                     />
                   </div>
@@ -621,11 +592,9 @@
               <div class="footer-item">
                 <h5>Sell</h5>
                 <ul>
-                  <li><a href="#">Selling Questions</a></li>
-                  <li><a href="#">How to Sell</a></li>
-                  <li><a href="#">Sell In-Game Items</a></li>
-                  <li><a href="#">Sell Video Games</a></li>
-                  <li><a href="#">Sell Gift Cards</a></li>
+                @foreach (footersells() as $item)               
+                  <li><a href="{{ $item->link }}">{{ $item->sell_item }}</a></li>
+                @endforeach
                 </ul>
               </div>
             </div>
@@ -633,11 +602,9 @@
               <div class="footer-item">
                 <h5>Buy</h5>
                 <ul>
-                  <li><a href="#">Buying Questions</a></li>
-                  <li><a href="#">How to Buy</a></li>
-                  <li><a href="#">Buy In-Game Items</a></li>
-                  <li><a href="#">Buy Video Games</a></li>
-                  <li><a href="#">Buy Gift Cards</a></li>
+                @foreach (footerbuys() as $item)               
+                  <li><a href="{{ $item->link }}">{{ $item->buy_item }}</a></li>
+                @endforeach
                 </ul>
               </div>
             </div>
@@ -645,11 +612,9 @@
               <div class="footer-item">
                 <h5>Resources</h5>
                 <ul>
-                  <li><a href="#">How Does Gameflip Work</a></li>
-                  <li><a href="#">Help Center</a></li>
-                  <li><a href="#">Forum</a></li>
-                  <li><a href="#">Return Policy</a></li>
-                  <li><a href="#">Developer API</a></li>
+                  @foreach (footerresources() as $item)               
+                  <li><a href="{{ $item->link }}">{{ $item->resource_item }}</a></li>
+                @endforeach
                 </ul>
               </div>
             </div>
@@ -658,14 +623,14 @@
                 <h5>Join our Community</h5>
                 <ul class="social">
                   <li>
-                    <a href="#"><i class="fab fa-discord"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="{{ discord()->link }}"><i class="fab fa-discord"></i></a>
+                    <a href="{{ facebook()->link }}"><i class="fab fa-facebook-f"></i></a>
                   </li>
                 </ul>
                 <ul class="social">
                   <li>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="{{ twitter()->link }}"><i class="fab fa-twitter"></i></a>
+                    <a href="{{ instagram()->link }}"><i class="fab fa-instagram"></i></a>
                   </li>
                 </ul>
               </div>
@@ -675,15 +640,17 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="links">
-                  <a href="#">About us</a>
-                  <a href="#">Terms of use</a>
-                  <a href="#">Privacy policy</a>
+                @foreach (footermenus() as $item)
+                    
+                    <a href="{{$item->link}}">{{$item->menu}}</a>
+
+                @endforeach
                 </div>
                 <p>Copyright &copy; 2021 Vbrae, Inc. All rights reserved.</p>
               </div>
               <div class="col-md-6">
                 <img
-                  src="{{ asset('frontend_assets/assets/images/icon_payment_logos.png') }}"
+                  src="{{ asset('uploads/paymentGateways') }}/{{ gateway()->image }}"
                   alt=""
                   class="img-fluid"
                 />

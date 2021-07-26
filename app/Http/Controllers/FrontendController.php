@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Image;
 use Carbon\Carbon;
-use App\Models\User;
+use App\Models\Sale;
 // use App\Models\Platform;
+use App\Models\User;
 use App\Models\Games;
+use App\Models\Genre;
 use App\Models\Listing;
 use App\Models\Platform;
 use Illuminate\Http\Request;
@@ -15,6 +17,7 @@ use MarcReichel\IGDBLaravel\Models\Cover;
 use MarcReichel\IGDBLaravel\Models\GameVideo;
 use MarcReichel\IGDBLaravel\Models\Screenshot;
 use MarcReichel\IGDBLaravel\Models\Platform as Plat;
+use Str;
 
 class FrontendController extends Controller
 {
@@ -34,6 +37,7 @@ class FrontendController extends Controller
        
         return view('frontend.index', [
             'games'      => Games::latest()->get(),
+            'gams'       => Games::all(),  
             'listings'   => Listing::where('status', 0)->orderBy('id', 'desc')->get(),
         ]);
     }
@@ -52,7 +56,6 @@ class FrontendController extends Controller
     public function search()
     {
         $name = request()->name; 
-
 
 
         $game = Games::where('name', 'LIKE', '%'.$name.'%')->get();
@@ -244,6 +247,62 @@ class FrontendController extends Controller
         
         return view('frontend.checkout', compact('data'));
 
+
+    }
+
+    /**
+     *  Order Details 
+     */
+    public function orderDetails($id)
+    {
+        $data = Sale::find($id); 
+        $listing = Listing::where('id', $data->listing_id)->first();
+        $game    = Games::where('id', $listing->game_id)->first();
+        return view('frontend.orderdetails', compact('data', 'listing', 'game'));
+    }
+
+    /**
+     *  Add Game 
+     */
+    public function addGame()
+    {
+        return view('frontend.addGame', ['platforms' => Platform::all(), 'genres' => Genre::all()]);
+    }
+
+    /**
+     *  Game create 
+     */
+    public function addGameSave(Request $request)
+    {
+        $request->validate([
+            'name'        => 'required', 
+            'image'       => 'required|image', 
+            'description' => 'required', 
+            'release_date'=> 'required', 
+            'platform_id' => 'required'
+        ]);
+
+        $slug = Str::slug($request->name);
+        $game = Games::create([
+            'name'           => $request->name, 
+            'cover'          => 'foo', 
+            'description'    => $request->description,
+            'game_url_slug'  => $slug,
+            'release_date'   => $request->release_date,
+            'platform_id'    => $request->platform_id,
+            'created_at'     => Carbon::now(),
+            // 'igdb_game_id'   => $g->id,
+        ]);
+
+        $image =  $request->file('image');
+        $filename = Carbon::now()->timestamp. $image->extension('image'); 
+        $location = public_path('games/' . $filename);
+        Image::make($image)->save($location);
+
+        $game->cover = $filename; 
+        $game->save(); 
+
+        return redirect('/search?name='.$request->name)->withSuccess('Game Added');
 
     }
 

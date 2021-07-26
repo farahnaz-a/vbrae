@@ -60,7 +60,7 @@ class CommunityIconController extends Controller
 
         // Insert data in database
         CommunityIcon::create($request->except('_token') + [
-            'created_at' => Carbon::now()
+            'created_at' => Carbon::now(), 
         ]);
 
          //Success message session

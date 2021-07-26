@@ -18,7 +18,7 @@
           <span class="number">32</span>
           <span>Offers</span>
         </a> --}}
-        <a href="./wishlist.html">
+        <a href="{{ url('/wishlists') }}">
           <span class="icon"><i class="fas fa-heart"></i></span>
           <span>Wishlist</span>
         </a>
@@ -26,7 +26,7 @@
           <span class="icon"><i class="fas fa-envelope"></i></span>
           <span>Messages</span>
         </a>
-        <a href="./notification.html">
+        <a href="{{route('notification.index')}}">
           <span class="icon"><i class="fas fa-bell"></i></span>
           <span>Notifications</span>
         </a>
@@ -62,7 +62,7 @@
           ><i class="far fa-frown me-2"></i>Currently active.</span
         >
         @elseif($item->status == 1)
-         @if(\App\Models\Gamekey::where('game_list_id', $item->id)->doesntExist())
+         @if(\App\Models\GameKey::where('game_list_id', $item->id)->doesntExist())
          <span class="no-data text-warning"
          ><i class="far fa-frown me-2"></i>Please update game keys. This listing is sold.</span
           >
@@ -90,7 +90,11 @@
               </span> 
               </a> 
             <span>
-                <a href="{{ route('frontend.listingDetails', $item->id) }}"><i class="fas fa-caret-square-right me-2"></i>Details</a>
+               @if(\App\Models\Sale::where('listing_id', $item->id)->exists())
+               <a href="{{ route('frontend.orderDetails', \App\Models\Sale::where('listing_id', $item->id)->first()->id) }}"><i class="fas fa-caret-square-right me-2"></i>Details</a>
+               @else
+               <a href="{{ route('frontend.listingDetails', $item->id) }}"><i class="fas fa-caret-square-right me-2"></i>Details</a>
+               @endif
             </span>
           </div>
         </div>
@@ -152,14 +156,50 @@
                                 </div>
                               </a>
                             </div>
+                            @if(\App\Models\UserRating::where('listing_id', $listing->id)->exists())
+                            @php
+                                $rating = \App\Models\UserRating::where('listing_id', $listing->id)->first(); 
+                            @endphp
+                                <div class="right">
+                                  <a href="javascript:void(0)" @if($rating->rating == 'bad') style="background: red;" @endif @if($rating->rating == 'good') class="primary" @endif
+                                    ><i class="fa {{ ($rating->rating == 'bad') ? 'fa-thumbs-down' : 'fa-thumbs-up'  }} me-2"></i>
+                                    <span class="d-none d-sm-inline"
+                                      >{{ \App\Models\User::find($listing->user_id)->name }} has been rated</span
+                                    ></a
+                                  >
+                                </div>
+                            @else 
                             <div class="right">
-                              <a href="./details.html" class="primary"
-                                ><i class="fa fa-thumbs-up me-2"></i>
-                                <span class="d-none d-sm-inline"
-                                  >Rate {{ \App\Models\User::find($listing->user_id)->name }}</span
-                                ></a
-                              >
-                            </div>
+                              <form action="{{ route('user.rating') }}" method="POST">
+                               @csrf 
+                               <input type="hidden" name="user_id" value="{{ $listing->user_id }}">
+                               <input type="hidden" name="rating" value="good">
+                               <input type="hidden" name="rated_by" value="{{ Auth::id() }}">
+                               <input type="hidden" name="listing_id" value="{{ $listing->id }}">
+                               <a href="{{ route('user.rating') }}" onclick="event.preventDefault();this.closest('form').submit();" class="primary"
+                               ><i class="fa fa-thumbs-up me-2"></i>
+                               <span class="d-none d-sm-inline"
+                                 >Rate {{ \App\Models\User::find($listing->user_id)->name }}</span
+                               ></a
+                             >
+                             </form>
+                           </div>
+                           <div class="right" style="margin-left: 20px">
+                             <form action="{{ route('user.rating') }}" method="POST">
+                               @csrf 
+                               <input type="hidden" name="user_id" value="{{ $listing->user_id }}">
+                               <input type="hidden" name="rating" value="bad">
+                               <input type="hidden" name="rated_by" value="{{ Auth::id() }}">
+                               <input type="hidden" name="listing_id" value="{{ $listing->id }}">
+                             <a href="{{ route('user.rating') }}" onclick="event.preventDefault();this.closest('form').submit();" style="background: red;"
+                             ><i class="fa fa-thumbs-down me-2"></i>
+                             <span class="d-none d-sm-inline"
+                               >Rate {{ \App\Models\User::find($listing->user_id)->name }}</span
+                             ></a
+                           >
+                             </form>
+                           </div>
+                            @endif
                           </div>
                           {{-- <div class="pluse danger">
                             <i class="fas fa-exclamation"></i>
@@ -170,7 +210,7 @@
                     <div class="panel-footer">
                       <small>{{ $item->created_at->diffForHumans() }} </small>
                       <div class="actions">
-                        <span><i class="fas fa-caret-square-right me-2"></i>Details</span>
+                        <a href="{{ route('frontend.orderDetails', $item->id) }}" ><span><i class="fas fa-caret-square-right me-2"></i>Details</span></a>
                       </div>
                     </div>
         @endforeach

@@ -20,4 +20,9 @@ class GameController extends Controller
             'games' => Games::simplePaginate(20),
         ]);
     }
+
+    public function create()
+    {
+        return view('games.create');
+    }
 }

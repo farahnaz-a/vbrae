@@ -25,11 +25,128 @@
 @endsection
                 
 @section('content')
-<div class="row">
-    <div class="col-12">
-        <h1 class="text-center">Welcome to Admin Dashboard !!!</h1>
-    </div>
-</div>
+
+
+     <!-- Dashboard Ecommerce Starts -->
+     <section id="dashboard-ecommerce">
+                    
+        <!-- Stats Horizontal Card -->
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="font-weight-bolder mb-0">{{ \App\Models\User::count() }}</h2>
+                            <p class="card-text">Total Users</p>
+                        </div>
+                        <div class="avatar bg-light-primary p-50 m-0">
+                            <div class="avatar-content">
+                                <i data-feather="users" class="font-medium-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="font-weight-bolder mb-0">{{ \App\Models\User::where('role', 'seller')->get()->count() }}</h2>
+                            <p class="card-text">Total Sellers</p>
+                        </div>
+                        <div class="avatar bg-light-success p-50 m-0">
+                            <div class="avatar-content">
+                                <i data-feather="server" class="font-medium-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="font-weight-bolder mb-0">{{ \App\Models\User::where('role', 'buyer')->get()->count() }}</h2>
+                            <p class="card-text">Total buyers</p>
+                        </div>
+                        <div class="avatar bg-light-danger p-50 m-0">
+                            <div class="avatar-content">
+                                <i data-feather="command" class="font-medium-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="font-weight-bolder mb-0">{{ \App\Models\User::where('role', 'admin')->get()->count() }}</h2>
+                            <p class="card-text">Total Admins</p>
+                        </div>
+                        <div class="avatar bg-light-warning p-50 m-0">
+                            <div class="avatar-content">
+                                <i data-feather="users" class="font-medium-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ Stats Horizontal Card -->
+
+        <!-- Stats Horizontal Card -->
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="font-weight-bolder mb-0">{{ \App\Models\Listing::count() }}</h2>
+                            <p class="card-text">Total Listing</p>
+                        </div>
+                        <div class="avatar bg-light-primary p-50 m-0">
+                            <div class="avatar-content">
+                                <i data-feather="activity" class="font-medium-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="font-weight-bolder mb-0">{{ \App\Models\Games::count() }}</h2>
+                            <p class="card-text">Total Games</p>
+                        </div>
+                        <div class="avatar bg-light-success p-50 m-0">
+                            <div class="avatar-content">
+                                <i data-feather="codepen" class="font-medium-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="font-weight-bolder mb-0">€ {{ \App\Models\Sale::sum('price') }}</h2>
+                            <p class="card-text">Total Earning</p>
+                        </div>
+                        <div class="avatar bg-light-danger p-50 m-0">
+                            <div class="avatar-content">
+                                <i data-feather="check-circle" class="font-medium-5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--/ Stats Horizontal Card -->
+    </section>
+    <!-- Dashboard Ecommerce ends -->
 
 <div class="row py-5">
     <div class="col-6">

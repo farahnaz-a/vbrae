@@ -76,7 +76,7 @@
                                 @forelse ($gamingConsole as $item)
                                     <tr>
                                         <td>{{ $loop ->index + 1 }}</td>
-                                        <td><img src="{{ asset('uploads/gamingconsoles') }}/{{ $item->image }}" width="150" alt="not-found"></td>
+                                        <td style="background: #444;"><img src="{{ asset('uploads/gamingconsoles') }}/{{ $item->image }}" width="150" alt="not-found"></td>
                                         <td>
                                             <div class="dropdown">
                                                 <button type="button" class="btn btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown">

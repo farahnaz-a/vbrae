@@ -123,36 +123,38 @@
     <div class="container mb-5">
       <div class="listings">
         <div class="row">
-         @foreach ($games->take(6) as $listing)
-         <div class="col-lg-3 col-xl-2 col-md-3 col-sm-4 col-6">
-          <div class="list-item">
-            <a href="{{ route('frontend.overview', $listing->id) }}">
-              {{-- <div class="payment-enabled">
-                <span><i class="fas fa-shield-alt"></i></span>
-                <span><img src="{{ asset('frontend_assets/assets/images/globe.png') }}" alt="" /></span>
-                <span>A</span>
-                <span><i class="fas fa-key"></i></span>
-              </div> --}}
-              <div>
-                <span class="label" style="background-color: {{ $listing->getPlatform->color }}"
-                  >{{ $listing->getPlatform->name }}</span
-                > 
-                <div class="game-image">
-                  <img src="{{ asset('games') }}/{{ $listing->cover }}" alt="" />
-                  <div class="game-title">{{ $listing->name }}</div>
+         @foreach ($gams as $key => $listing)
+         @if(\App\Models\Listing::where('game_id', $listing->id)->exists())
+          <div class="col-lg-3 col-xl-2 col-md-3 col-sm-4 col-6">
+            <div class="list-item">
+              <a href="{{ route('frontend.overview', $listing->id) }}">
+                {{-- <div class="payment-enabled">
+                  <span><i class="fas fa-shield-alt"></i></span>
+                  <span><img src="{{ asset('frontend_assets/assets/images/globe.png') }}" alt="" /></span>
+                  <span>A</span>
+                  <span><i class="fas fa-key"></i></span>
+                </div> --}}
+                <div>
+                  <span class="label" style="background-color: {{ $listing->getPlatform->color }}"
+                    >{{ $listing->getPlatform->name }}</span
+                  > 
+                  <div class="game-image">
+                    <img src="{{ asset('games') }}/{{ $listing->cover }}" alt="" />
+                    <div class="game-title">{{ $listing->name }}</div>
+                  </div>
                 </div>
-              </div>
-              @if(wishListCount($listing->id) > 0)
-              <span class="price bg-dark"><i class="fa fa-heartbeat me-2"></i>{{ wishListCount($listing->id) }}</span>
-              @endif
-              {{-- <span class="price">€ {{ $listing->price }}</span> --}}
-            </a>
-            {{-- <a href="./user.html" class="published-by">
-              <img src="{{ $listing->getUser->profile_photo_url }}" alt="" />
-              <strong>{{ $listing->getUser->name }}</strong>
-            </a> --}}
+                @if(wishListCount($listing->id) > 0)
+                <span class="price bg-dark"><i class="fa fa-heartbeat me-2"></i>{{ wishListCount($listing->id) }}</span>
+                @endif
+                {{-- <span class="price">€ {{ $listing->price }}</span> --}}
+              </a>
+              {{-- <a href="./user.html" class="published-by">
+                <img src="{{ $listing->getUser->profile_photo_url }}" alt="" />
+                <strong>{{ $listing->getUser->name }}</strong>
+              </a> --}}
+            </div>
           </div>
-        </div>
+         @endif
          @endforeach
         </div>
         <div class="more">

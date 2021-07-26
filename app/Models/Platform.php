@@ -13,7 +13,7 @@ class Platform extends Model
 
     public function getGames()
     {
-        return $this->hasMany('App\Models\Game');
+        return $this->hasMany('App\Models\Games');
     }
 
     public function digitals()

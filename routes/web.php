@@ -21,6 +21,7 @@ use App\Http\Controllers\PlatformController;
 use App\Http\Controllers\WishListController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PaymentGatewayController;
+use App\Http\Controllers\UserRatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,8 +54,12 @@ Route::get('/notification/{id}/seen', [NotificationController::class, 'seen'])->
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.index');
 Route::get('/user-profile/{id}/{name}', [FrontendController::class, 'userprofile'])->name('frontend.userprofile');
 Route::get('/buy/{id}', [FrontendController::class, 'buy'])->middleware('auth')->name('frontend.buy');
+Route::get('/order-details/{id}', [FrontendController::class, 'orderDetails'])->middleware('auth')->name('frontend.orderDetails');
 Route::post('/checkout', [FrontendController::class, 'checkout'])->name('frontend.checkout');
+Route::get('/add-game', [FrontendController::class, 'addGame'])->name('frontend.addGame');
+Route::post('/add-game-save', [FrontendController::class, 'addGameSave'])->name('frontend.addGameSave');
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
+
 
 // AdminController 
 Route::group(['prefix' => 'admin'], function () {
@@ -110,4 +115,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/dashboard/{name}', [UserController::class, 'index'])->name('user.dashboard');
     Route::get('/{id}/settings', [UserController::class, 'settings'])->name('user.settings');
     Route::post('/{id}/update', [UserController::class, 'update'])->name('user.update');
+
+    // UserRatingController 
+    Route::post('/rate', [UserRatingController::class, 'store'])->name('user.rating');
 });
