@@ -58,6 +58,7 @@ Route::get('/order-details/{id}', [FrontendController::class, 'orderDetails'])->
 Route::post('/checkout', [FrontendController::class, 'checkout'])->name('frontend.checkout');
 Route::get('/add-game', [FrontendController::class, 'addGame'])->name('frontend.addGame');
 Route::post('/add-game-save', [FrontendController::class, 'addGameSave'])->name('frontend.addGameSave');
+Route::get('/cancel-order/{id}/now', [FrontendController::class, 'cancel'])->name('frontend.cancel');
 Route::post('stripe', [StripeController::class, 'stripePost'])->name('stripe.post');
 
 

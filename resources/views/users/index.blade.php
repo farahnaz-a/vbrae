@@ -120,7 +120,7 @@
      
       </div>
       <div class="dash-panel">
-        @foreach (\App\Models\Sale::where('user_id', Auth::id())->get() as $item)
+        @foreach (\App\Models\Sale::where('user_id', Auth::id())->where('status', 'confirmed')->get() as $item)
             @php
                 $listing = \App\Models\Listing::find($item->listing_id); 
             @endphp

@@ -195,6 +195,7 @@
                 </div>
                 <p class="text-success mb-0"><small><i class="fas fa-check"></i>{{ ($data->region == 'Global') ? ' This game key can be activated in any country !' : ' This game key can be activated in '. $data->region . '!' }}</small></p>
                 <p class="text-danger"><small><i class="fas fa-ban"></i> This is not refundable because its a digital item.</small></p>
+                <p class="text-danger"><small><i class="fas fa-ban"></i> Seller has 24 hours to send you The order. After 24 hours you are able to cancel The order and recieve a refund.</small></p>
                 <div class="form-check">
                     <form action="{{ route('frontend.buy', $data->id) }}" method="GET">
                   <input id="agree" class="form-check-input" type="checkbox" value="" required>

@@ -390,12 +390,12 @@
                         ></span>
                         <span class="text">Sign in</span>
                       </button>
-                      <button
-                        type="button"
+                      <a
+                        href="{{ url('/forgot-password') }}"
                         class="btn btn-secondary btn-sm w-100"
                       >
                         Forgot your password
-                      </button>
+                      </a>
                     </form>
                   </div>
                 </div>
@@ -545,6 +545,7 @@
         {{ session('success') }}
       </div>
       @endif
+    
        @yield('content')
 
        <footer class="one">

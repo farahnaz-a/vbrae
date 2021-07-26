@@ -306,6 +306,18 @@ class FrontendController extends Controller
 
     }
 
+    /**
+     *  Cancel 
+     */
+    public function cancel($id)
+    {
+        $sale = Sale::find($id); 
+        $sale->status = 'cancelled';
+        $sale->save();
+
+        return redirect('/')->withSuccess('order cancelled');
+    }
+
 
 
 // END    

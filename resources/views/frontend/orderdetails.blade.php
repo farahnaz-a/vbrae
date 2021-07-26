@@ -51,7 +51,7 @@
         <p class="text-center">Game keys : Keys are not provided yet. </p>
         @endforelse
         @else 
-        <p class="text-center">Game keys : Keys are not provided yet. </p>
+        <p class="text-center">Game keys : Keys are not provided yet. <a href="{{ route('frontend.cancel', $data->id) }}">Cancel Order?</a> </p>
         @endif
         <div>
           <div>

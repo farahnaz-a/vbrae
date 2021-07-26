@@ -75,7 +75,11 @@
                               </a>
                           </td>
                           <td>
-                              <span class="badge badge-pill badge-success">Payment confirmed</span>
+                              @if($sale->status == 'confirmed')
+                              <span class="badge badge-pill badge-success">{{ $sale->status }}</span>
+                              @else 
+                              <span class="badge badge-pill badge-danger">{{ $sale->status }}</span>
+                              @endif
                           </td>
                         </tr>
                         @endforeach

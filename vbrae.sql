@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2021 at 12:23 AM
+-- Generation Time: Jul 27, 2021 at 01:47 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -1588,7 +1588,7 @@ INSERT INTO `listings` (`id`, `user_id`, `game_id`, `platform_id`, `name`, `pict
 (490, 1, 732, 6, NULL, NULL, NULL, 'Global', 10, 0, NULL, 5, NULL, 1, 0, NULL, 0, 0, 0, 0, 0, NULL, 0, 1, 8, 1, '2021-07-24 22:44:34', NULL, NULL, '2021-07-24 16:44:34', '2021-07-24 16:44:34'),
 (491, 2, 725, 13, NULL, NULL, NULL, 'Global', 30, 0, NULL, 3, NULL, 1, 0, NULL, 0, 0, 0, 0, 0, NULL, 0, 1, 5, 1, '2021-07-23 21:05:07', NULL, NULL, '2021-07-23 15:05:07', '2021-07-23 15:05:07'),
 (509, 1, 754, 6, NULL, NULL, NULL, 'Global', 12, 0, NULL, 1, NULL, 0, 0, NULL, 0, 0, 0, 0, 0, NULL, 0, 1, 4, 1, '2021-07-26 13:12:16', NULL, NULL, '2021-07-23 15:37:36', '2021-07-26 07:12:16'),
-(493, 2, 727, 25, NULL, NULL, NULL, 'Global', 10, 0, NULL, 1, NULL, 1, 0, NULL, 0, 0, 0, 0, 0, NULL, 0, 0, 8, 1, '2021-07-23 21:34:35', NULL, NULL, '2021-07-13 15:23:25', '2021-07-23 15:34:35'),
+(493, 2, 727, 25, NULL, NULL, NULL, 'Global', 10, 0, NULL, 1, NULL, 1, 0, NULL, 0, 0, 0, 0, 0, NULL, 0, 0, 9, 1, '2021-07-26 22:49:48', NULL, NULL, '2021-07-13 15:23:25', '2021-07-26 16:49:48'),
 (494, 2, 727, 25, NULL, NULL, NULL, 'Global', 10, 0, NULL, 1, NULL, 1, 0, NULL, 0, 0, 0, 0, 0, NULL, 0, 0, 8, 1, '2021-07-23 21:34:45', NULL, NULL, '2021-07-13 15:24:11', '2021-07-23 15:34:45'),
 (495, 2, 752, 25, NULL, NULL, NULL, 'Global', 14, 0, NULL, 1, NULL, 1, 0, NULL, 0, 0, 0, 0, 0, NULL, 0, 0, 2, 1, '2021-07-13 23:03:16', NULL, NULL, '2021-07-13 17:02:52', '2021-07-13 17:03:16'),
 (496, 2, 570, 7, NULL, NULL, NULL, 'Global', 12, 0, NULL, 1, NULL, 0, 0, NULL, 0, 0, 0, 0, 0, NULL, 0, 0, 0, 1, '2021-07-14 10:46:54', NULL, NULL, '2021-07-14 04:46:54', '2021-07-14 04:46:54'),
@@ -1721,6 +1721,13 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('test@test.com', '$2y$10$tbPEQFFZJxo1HToNiLz1..4cUYmTtKP4d.3yGjIHVflNPbf8SGGmu', '2021-07-26 17:05:25');
+
 -- --------------------------------------------------------
 
 --
@@ -1814,6 +1821,7 @@ CREATE TABLE `sales` (
   `price` int(11) NOT NULL,
   `rating` enum('good','bad','no') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'no',
   `comment` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('cancelled','confirmed') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'confirmed',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1822,14 +1830,14 @@ CREATE TABLE `sales` (
 -- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`id`, `user_id`, `listing_id`, `price`, `rating`, `comment`, `created_at`, `updated_at`) VALUES
-(1, 2, 507, 7, 'no', NULL, '2021-07-23 14:43:47', '2021-07-23 14:43:47'),
-(2, 2, 507, 7, 'no', NULL, '2021-07-23 14:44:20', '2021-07-23 14:44:20'),
-(3, 1, 491, 30, 'no', NULL, '2021-07-23 14:52:55', '2021-07-23 14:52:55'),
-(4, 2, 506, 7, 'no', NULL, '2021-07-23 15:33:02', '2021-07-23 15:33:02'),
-(5, 2, 509, 12, 'no', NULL, '2021-07-23 15:39:45', '2021-07-23 15:39:45'),
-(6, 1, 512, 123, 'no', NULL, '2021-07-23 15:48:43', '2021-07-23 15:48:43'),
-(7, 2, 490, 10, 'no', NULL, '2021-07-24 16:42:56', '2021-07-24 16:42:56');
+INSERT INTO `sales` (`id`, `user_id`, `listing_id`, `price`, `rating`, `comment`, `status`, `created_at`, `updated_at`) VALUES
+(1, 2, 507, 7, 'no', NULL, 'cancelled', '2021-07-23 14:43:47', '2021-07-26 17:45:56'),
+(2, 2, 507, 7, 'no', NULL, 'confirmed', '2021-07-23 14:44:20', '2021-07-23 14:44:20'),
+(3, 1, 491, 30, 'no', NULL, 'cancelled', '2021-07-23 14:52:55', '2021-07-26 17:45:24'),
+(4, 2, 506, 7, 'no', NULL, 'confirmed', '2021-07-23 15:33:02', '2021-07-23 15:33:02'),
+(5, 2, 509, 12, 'no', NULL, 'confirmed', '2021-07-23 15:39:45', '2021-07-23 15:39:45'),
+(6, 1, 512, 123, 'no', NULL, 'confirmed', '2021-07-23 15:48:43', '2021-07-23 15:48:43'),
+(7, 2, 490, 10, 'no', NULL, 'cancelled', '2021-07-24 16:42:56', '2021-07-26 17:46:13');
 
 -- --------------------------------------------------------
 
@@ -1851,8 +1859,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('LKEav5Df6qr9epXYeo81m46elB3ns6yE3wphZ1tP', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoibFBYeXpzekVQWmNPeFlHVDJmeXpXSmdWeDN4ZE5hZW9VQU82TlRBWiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCRIUVl0SGNRdzdHZDR1cXlLZ0o0MnUuend1UFV6UjhhWU5BR3daUDIwaE1yWElVTVBVWHFIaSI7fQ==', 1627338172),
-('vM0iA5xUop5jFkmuoCKghk0wGYZ2vvhUljmEsmfS', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMVFySm1KZUNrVVNyRTA2ZDZ1SDRraW90ZWdQdHd4WjJ3R1RxbXlHRyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9jb21tdW5pdHlJY29ucyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCR4N3hVeEdrQWZrTy5MOG1WOTJRLkcuN0RmZXRIVDB2VlhLSlNXZmt2dDZnL2ZWNmFGWU5ETyI7fQ==', 1627337493);
+('JjJLqPi95Ag3chLbNzAAKqSuS386UEG6Qcj6krVi', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoicnJqVmVZbGVMaXI2NGpHTU5uNE5iQ3Y4aDA2UlZURElSbmRlRmJjQSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCRIUVl0SGNRdzdHZDR1cXlLZ0o0MnUuend1UFV6UjhhWU5BR3daUDIwaE1yWElVTVBVWHFIaSI7fQ==', 1627343183),
+('vM0iA5xUop5jFkmuoCKghk0wGYZ2vvhUljmEsmfS', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMVFySm1KZUNrVVNyRTA2ZDZ1SDRraW90ZWdQdHd4WjJ3R1RxbXlHRyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9zYWxlcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCR4N3hVeEdrQWZrTy5MOG1WOTJRLkcuN0RmZXRIVDB2VlhLSlNXZmt2dDZnL2ZWNmFGWU5ETyI7fQ==', 1627343185);
 
 -- --------------------------------------------------------
 

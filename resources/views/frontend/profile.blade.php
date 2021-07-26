@@ -74,7 +74,7 @@
                 <div class="page-pagination">
                     <div class="prev">«</div>
                     <div class="pages">
-                       @for ($i = 1; $i <= ceil($listings->total()/30); $i++)
+                       @for ($i = 1; $i <= ceil($listings->count()/30); $i++)
                        <a href="?page={{ $i }}"><span class="{{ (request()->page == $i) ? 'active' : '' }}">{{ $i }}</span></a>
                        @endfor
                       
